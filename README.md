@@ -19,10 +19,6 @@ This is an [Omeka Classic](https://omeka.org/classic/) theme designed for browsi
 
 * **Sasha Renninger** - *Primary Developer* - [Github](https://github.com/sashafr)
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
 ## Acknowledgments
 
 * [Minimalist](https://github.com/omeka/theme-minimalist) - Used as base theme for initial development
