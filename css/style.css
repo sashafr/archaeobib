@@ -86,3 +86,20 @@
 }
 
 /** End Navigation **/
+
+/** Index Styles **/
+.ab-index-title {
+    border-width: 1px;
+    border-bottom-style: solid;
+    margin: 1rem;
+    padding-bottom: 0.5rem;
+}
+
+.ab-index-subtitle {
+    margin-left: 2rem;
+    color: rgb(0,0,128);
+}
+
+#search-form {
+    margin-left: 2rem;
+}

@@ -1,5 +1,37 @@
 <?php echo head(); ?>
 
+<div class="container-fluid">
+    
+    <div class="row">
+        <div class="col-sm-12">
+            <p class="ab-index-title"><strong>Search</strong></p>
+        </div>
+    </div>
+    
+    <div class="row justify-content-between">
+        <div class="col-sm-3">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <p class="ab-index-subtitle"><strong>Basic Search</strong></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <?php echo search_form(); ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php if (get_theme_option('Bsearch Text')): ?>
+            <div class="col-sm-6">
+                <?php echo get_theme_option('Bsearch Text'); ?>
+            </div>
+        <?php endif; ?>
+    </div>
+    
+</div>
+
 
         
       <TABLE border=0 cellPadding=0 cellSpacing=0>
@@ -7,38 +39,10 @@
           <TD valign="top" width="2%">
           </TD>
           
-    <TD width="96%" align="left" valign="top"> <b>Search</b> 
+    <TD width="96%" align="left" valign="top"> 
       <hr size="1">
       <br>
       <table border="0" cellspacing="0" cellpadding="0" width="100%" height="671">
-        <tr> 
-          <td valign="top" width="32" height="178"><p><br>
-              <img border="0" src="bwg_search_fast.gif" width="32" height="32"></p></td>
-          <td valign="top" height="178"><b><font color="#000080">Basic Search</font></b> 
-            <p> 
-            <form method="POST" action="/bw_search_fast" onSubmit="" name="form_search_fast">
-              <input type="text" name="edit_fast" size="32">
-              <input type="submit" value="Enter" name="B1">
-            </form>
-            <p>&nbsp; </td>
-          <td width="20" valign="top" height="178">&nbsp;&nbsp;&nbsp;&nbsp;</td>
-          <td valign="top" height="178" colspan="3"><font size="2" color="#808080" face="Verdana, Arial, Helvetica, sans-serif">Basic 
-            Search allows you to search the database by a single word or combination 
-            of words. Basic Search is most useful for broad general searches, 
-            (e.g., &quot;agriculture,&quot;) or for very specific searches like 
-            a particular archaeological site (e.g., Phu Lon). This search will 
-            find bibliographic entries that have your chosen word or phrase in 
-            any data fields. For example, if you enter &quot;white&quot; it will 
-            find all the references written by White as well as any entries that 
-            have the word &quot;white&quot; in any other data field. If you are 
-            only interested in the entries authored by persons named White then 
-            go to the Advanced Search and under author enter <i>White</i>, or 
-            use the <strong>Lookup</strong> author feature. <br>
-            <br>
-            <strong>Lookup</strong> is a powerful shortcut for retrieving references 
-            by author, journal, keyword, year, publisher, or reference type (e.g., 
-            Journal article, Book).</font> </td>
-        </tr>
         <tr> 
           <td valign="top" colspan="6" height="23"> <hr size="1"> </td>
         </tr>
