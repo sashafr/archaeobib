@@ -82,12 +82,12 @@
 
 .ab-nav li a {
     display: block;
-    color: black;
+    color: white;
 }
 
 /** End Navigation **/
 
-/** Index Styles **/
+/** Index **/
 .ab-index-title {
     border-width: 1px;
     border-bottom-style: solid;
@@ -96,10 +96,23 @@
 }
 
 .ab-index-subtitle {
-    margin-left: 2rem;
     color: rgb(0,0,128);
 }
 
-#search-form {
-    margin-left: 2rem;
+/** End Index **/
+
+/** Random Stuff **/
+
+@media only screen and (max-width: 768px) {
+
+    .ab-mobile-hide {
+        display: none;
+    }
+
 }
+
+.ab-index-hide {
+    display: none;
+}
+
+/** End Random **/

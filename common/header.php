@@ -24,6 +24,7 @@
     <?php
         queue_css_file(array('style'));
         queue_css_url("https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css");
+        queue_css_url("https://use.fontawesome.com/releases/v5.5.0/css/all.css");
         echo head_css();
     ?>
     

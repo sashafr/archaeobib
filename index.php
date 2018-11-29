@@ -24,11 +24,39 @@
             </div>
         </div>
         <?php if (get_theme_option('Bsearch Text')): ?>
-            <div class="col-sm-6">
+            <div class="col-sm-6 ab-mobile-hide">
                 <?php echo get_theme_option('Bsearch Text'); ?>
             </div>
         <?php endif; ?>
     </div>
+    
+    <div class="row">
+        <div class="col-sm-12">
+            <p class="ab-index-title">&nbsp;</p>
+        </div>
+    </div>
+    
+    <div class="row justify-content-between">
+        <div class="col-sm-3">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <p class="ab-index-subtitle"><strong>Advanced Search</strong></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <?php echo $this->partial('items/search-form.php', array('formAttributes' => array('id' => 'advanced-search-form'))); ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php if (get_theme_option('Asearch Text')): ?>
+            <div class="col-sm-6 ab-mobile-hide">
+                <?php echo get_theme_option('Asearch Text'); ?>
+            </div>
+        <?php endif; ?>
+    </div>    
     
 </div>
 
@@ -45,92 +73,6 @@
       <table border="0" cellspacing="0" cellpadding="0" width="100%" height="671">
         <tr> 
           <td valign="top" colspan="6" height="23"> <hr size="1"> </td>
-        </tr>
-        <tr> 
-          <td valign="top" width="32" height="224"><p><br>
-              <img border="0" src="bwg_search_advanced.gif" width="32" height="32"></p></td>
-          <td valign="top" height="224"><b><font color="#000080" size="2">Advanced 
-            Search</font><font color="#000080" size="3">&nbsp;<br>
-            </font></b> <form method="POST" action="/bw_search_adv" onSubmit="" name="form_search_adv">
-              <input TYPE="hidden" NAME="VTI-GROUP" VALUE="0">
-              <br>
-              <select size="1" name="combo_adv1">
-                <option selected>Authors</option>
-                <option>Title</option>
-                <option>Journal / Book Title</option>
-                <option>Year</option>
-                <option>Abstract</option>
-                <option>Keywords</option>
-                <option>Reference Type</option>
-                <option>Series Editor</option>
-                <option>Series Title</option>
-                <option>Publisher</option>
-                <option>Language</option>
-                <option>Reference ID</option>
-                <option>Created By</option>
-              </select>
-              <input type="text" name="edit_adv1" size="20">
-              <input type="submit" value="Search" name="B1">
-              <br>
-              <input type="radio" value="AND" checked name="radio_adv1">
-              AND 
-              <input type="radio" name="radio_adv1" value="OR">
-              OR 
-              <input type="radio" name="radio_adv1" value="AND NOT">
-              NOT<br>
-              <select size="1" name="combo_adv2">
-                <option>Authors</option>
-                <option>Title</option>
-                <option>Journal / Book Title</option>
-                <option>Year</option>
-                <option>Abstract</option>
-                <option selected>Keywords</option>
-                <option>Reference Type</option>
-                <option>Series Editor</option>
-                <option>Series Title</option>
-                <option>Publisher</option>
-                <option>Language</option>
-                <option>Created By</option>
-              </select>
-              <input type="text" name="edit_adv2" size="20">
-              <input type="reset" value="Reset" name="B2">
-              <br>
-              <input type="radio" name="radio_adv2" value="AND" checked>
-              AND 
-              <input type="radio" name="radio_adv2" value="OR">
-              OR 
-              <input type="radio" name="radio_adv2" value="AND NOT">
-              NOT<br>
-              <select size="1" name="combo_adv3">
-                <option>Authors</option>
-                <option>Title</option>
-                <option>Journal / Book Title</option>
-                <option selected>Year</option>
-                <option>Abstract</option>
-                <option>Keywords</option>
-                <option>Reference Type</option>
-                <option>Series Editor</option>
-                <option>Series Title</option>
-                <option>Publisher</option>
-                <option>Language</option>
-                <option>Created By</option>
-              </select>
-              <input type="text" name="edit_adv3" size="20"></p>
-              </form></td>
-          <td width="20" valign="top" height="224">&nbsp;&nbsp;&nbsp;&nbsp;</td>
-          <td valign="top" height="224" colspan="3"> <p><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#808080">Advanced 
-              Search lets you do refined searches by specifying one or more data 
-              fields. For example, to find all records by Smith in the year 1990, 
-              specify <i>1990</i> and <i>Smith</i> in the Year and Author fields.</font></p>
-            <p><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#808080">For 
-              an integer field like Year, you can use <i>></i>, or <i><</i>, or 
-              <i>between</i> operators. For example: Year > 1990; Year between 
-              1990 and 1994. </font></p>
-            <p><font color="#808080" size="2" face="Verdana, Arial, Helvetica, sans-serif">Authors and title are entered in the database as exactly as possible with a Roman alphabet, with accents and other diacritical marks. Therefore, these non-English characters must be entered in the Search fields, or else no results will appear. For example, you must enter Z&eacute;phir, not Zephir. Use Character Map to copy these characters into your search name.</font></p>
-            <p><font face="Verdana, Arial, Helvetica" size="2"><b><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#808080">*Warning:</font></b> 
-              </font><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#808080">Problems 
-          have been reported for users attempting to use Advanced Search to search for journal names. If you have problems, please use the Journal Search area below.</font></p>
-          <p>&nbsp;</p></td>
         </tr>
         <tr> 
           <td valign="top" colspan="6" height="23"> <hr size="1"> </td>
