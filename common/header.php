@@ -36,7 +36,7 @@
     
 </head>
 
-<?php echo body_tag(array('id' => @$bodyid, 'class' => @$bodyclass)); ?>
+<?php echo body_tag(array('id' => @$bodyid, 'class' => @$bodyclass.' ab-body')); ?>
 
     <a href="#content" id="skipnav"><?php echo __('Skip to main content'); ?></a>
     <?php fire_plugin_hook('public_body', array('view'=>$this)); ?>
@@ -49,7 +49,21 @@
                     <div id="site-title"><?php echo link_to_home_page(option('site_title')); ?></div>
                 </div>
                 <div class="col-sm-2">
-                    <button type="button" class="btn btn-secondary btn-sm ab-header-button">Logoff</button>
+                    <?php if (get_theme_option('Help Link')): ?>
+                        <a href="<?php echo url(get_theme_option('Help Link')); ?>"><button type="button" class="btn btn-info btn-sm ab-header-button">Help</button></a>
+                    <?php endif; ?>                     
+                    <?php if(current_user()): ?>
+                        <a href="<?php echo url('users/logout'); ?>"><button type="button" class="btn btn-secondary btn-sm ab-header-button">Logoff</button></a>
+                    <?php else: ?>
+                        <a href="<?php echo url('users/login'); ?>"><button type="button" class="btn btn-secondary btn-sm ab-header-button">Login</button></a>
+                    <?php endif; ?>                    
+                </div>                
+            </div>
+        </div>
+        <div class="container-fluid ab-header-tabs">
+            <div class="row">
+                <div class="col-sm-12">
+                    <?php echo public_nav_main()->setUlClass('ab-nav'); ?>
                 </div>
             </div>
         </div>

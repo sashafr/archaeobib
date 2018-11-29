@@ -1,6 +1,6 @@
 /** Header **/
 
-#ab-body {
+.ab-body {
     background-color: #F7EEDD;
     margin: 1px 0 1px 0;
     color: #000000;
@@ -35,6 +35,14 @@
     font-weight: bold;
 }
 
+#site-title a:hover {
+    text-decoration: none;
+}
+
+#site-title a {
+    color: black;
+}
+
 #ab-title-header {
     margin-top: 1em;
     margin-bottom: 1em;
@@ -42,6 +50,39 @@
 
 .ab-header-button {
     float: right;
+    margin: 0 5px;
+}
+
+.ab-header-tabs {
+    border-width: 2px;
+    border-bottom-style: solid;
 }
 
 /** End Header **/
+
+/** Navigation **/
+
+.ab-nav {
+    list-style-type: none;
+}
+
+.ab-nav li {
+    float: right;
+    padding: 0 5px;
+    border-radius: 10px 10px 0 0;
+}
+
+.ab-nav li:nth-child(odd) {
+    background-color: #99CCFF;
+}
+
+.ab-nav li:nth-child(even) {
+    background-color: #31659C;
+}
+
+.ab-nav li a {
+    display: block;
+    color: black;
+}
+
+/** End Navigation **/
