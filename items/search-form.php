@@ -57,9 +57,12 @@ $formAttributes['method'] = 'GET';
                     )
                 );
                 if (is_current_url(url('/'))) {
-                	$bibElementSet= get_record('ElementSet',array('name'=>"Dublin Core"));
+                	// $bibElementSet= get_record('ElementSet',array('name'=>"Item Type Metadata"));
+                	$itemType = get_record('ItemType', array('name'=>'Bibliographic Entry'));
+                	$db = get_db();
+                	$bibElementSet = $db->getTable('Element')->fetchObjects("SELECT * FROM {$db->prefix}elements e INNER JOIN {$db->prefix}item_types_elements ite ON e.id = ite.element_id WHERE ite.item_type_id = $itemType->id");
                 	$bibElements=array();
-                	foreach ($bibElementSet->getElements() as $element){
+                	foreach ($bibElementSet as $element){
                 		$bibElements[$element->id]=$element->name;
                 	}	
                     echo $this->formSelect(
