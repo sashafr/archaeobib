@@ -56,7 +56,35 @@
                 <?php echo get_theme_option('Asearch Text'); ?>
             </div>
         <?php endif; ?>
-    </div>    
+    </div>
+    
+    <div class="row">
+        <div class="col-sm-12">
+            <p class="ab-index-title">&nbsp;</p>
+        </div>
+    </div>
+    
+    <div class="row justify-content-between">
+        <div class="col-sm-6">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <p class="ab-index-subtitle"><strong>Lookup</strong></p>
+                        <p><a href="<?php echo url('items/browse?added_since='.date("Ymd", strtotime("-1 week"))); ?>">Within the Past Week</a>
+                        <br />
+                        <a href="<?php echo url('items/browse?added_since='.date("Ymd", strtotime("-1 month"))); ?>">Within the Past Month</a>
+                        <br />
+                        <a href="<?php echo url('items/browse?added_since='.date("Ymd", strtotime("-1 year"))); ?>">Within the Past Year</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php if (get_theme_option('Asearch Text')): ?>
+            <div class="col-sm-6 ab-mobile-hide">
+                <?php echo get_theme_option('Asearch Text'); ?>
+            </div>
+        <?php endif; ?>
+    </div>     
     
 </div>
 
