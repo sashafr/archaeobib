@@ -108,6 +108,19 @@
     margin: 1px;
 }
 
+.ab-lookup-text {
+    margin-bottom: 10px;
+}
+
+.ab-index-filters {
+    text-align: center;
+}
+
+.ab-index-letters {
+    padding: 0 5px;
+    font-size: small;
+}
+
 /** End Index **/
 
 /** Random Stuff **/
