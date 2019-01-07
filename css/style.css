@@ -99,6 +99,15 @@
     color: rgb(0,0,128);
 }
 
+.ab-advanced-search-form input {
+    border-width: 1px;
+}
+
+.ab-advanced-search-form input, .ab-advanced-search-form select, .ab-advanced-search-form button {
+    font-size: small;
+    margin: 1px;
+}
+
 /** End Index **/
 
 /** Random Stuff **/

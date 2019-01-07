@@ -37,7 +37,7 @@
     </div>
     
     <div class="row justify-content-between">
-        <div class="col-sm-3">
+        <div class="col-sm-6">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-12">
@@ -46,7 +46,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
-                        <?php echo $this->partial('items/search-form.php', array('formAttributes' => array('id' => 'advanced-search-form'))); ?>
+                        <?php echo $this->partial('items/search-form.php', array('formAttributes' => array('id' => 'advanced-search-form', 'class' => 'ab-advanced-search-form'))); ?>
                     </div>
                 </div>
             </div>
