@@ -56,9 +56,10 @@ $formAttributes['method'] = 'GET';
                         'or' => __('OR'),
                     )
                 );
-                if (is_current_url(url('/'))) {
+                if (is_current_url(url('/')) and get_theme_option('Search Itemtype') != "" and get_record('ItemType', array('name'=>'Bibliographic Entry'))) {
                 	// $bibElementSet= get_record('ElementSet',array('name'=>"Item Type Metadata"));
-                	$itemType = get_record('ItemType', array('name'=>'Bibliographic Entry'));
+                	$itemTypeName = get_theme_option('Search Itemtype');
+                	$itemType = get_record('ItemType', array('name'=> $itemTypeName));
                 	$db = get_db();
                 	$bibElementSet = $db->getTable('Element')->fetchObjects("SELECT * FROM {$db->prefix}elements e INNER JOIN {$db->prefix}item_types_elements ite ON e.id = ite.element_id WHERE ite.item_type_id = $itemType->id");
                 	$bibElements=array();
