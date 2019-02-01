@@ -131,3 +131,5 @@
         <?php endif; ?>
     </div>     
 </div>
+
+<?php echo foot(); ?>
