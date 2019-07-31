@@ -56,26 +56,28 @@ $formAttributes['method'] = 'GET';
                         'or' => __('OR'),
                     )
                 );
-                if (is_current_url(url('/')) and get_theme_option('Search Itemtype') != "" and get_record('ItemType', array('name'=>'Bibliographic Entry'))) {
+                if (is_current_url(url('/')) and get_theme_option('Asearch Fields') != "") {
                 	// $bibElementSet= get_record('ElementSet',array('name'=>"Item Type Metadata"));
-                	$itemTypeName = get_theme_option('Search Itemtype');
-                	$itemType = get_record('ItemType', array('name'=> $itemTypeName));
+                	$asearch_fields = get_theme_option('Asearch Fields');
+                	$fields_array = array_map('trim', explode(',', $asearch_fields));
                 	$db = get_db();
-                	$bibElementSet = $db->getTable('Element')->fetchObjects("SELECT * FROM {$db->prefix}elements e INNER JOIN {$db->prefix}item_types_elements ite ON e.id = ite.element_id WHERE ite.item_type_id = $itemType->id");
                 	$bibElements=array();
-                	foreach ($bibElementSet as $element){
-                		$bibElements[$element->id]=$element->name;
-                	}	
-                    echo $this->formSelect(
-                        "advanced[$i][element_id]",
-                        @$rows['element_id'],
-                        array(
-                            'title' => __("Search Field"),
-                            'id' => null,
-                            'class' => 'advanced-search-element'
-                        ),
-                        $bibElements
-                    );
+                	foreach ($fields_array as $afield){
+                    $bibElementSet = $db->getTable('Element')->fetchObjects("SELECT * FROM {$db->prefix}elements e WHERE e.name = '{$afield}'");
+                    foreach($bibElementSet as $element) {
+                      $bibElements[$element->id]=$element->name;
+                    }
+                	}
+                  echo $this->formSelect(
+                      "advanced[$i][element_id]",
+                      @$rows['element_id'],
+                      array(
+                          'title' => __("Search Field"),
+                          'id' => null,
+                          'class' => 'advanced-search-element'
+                      ),
+                      $bibElements
+                  );
                 } else {
                     echo $this->formSelect(
                         "advanced[$i][element_id]",
@@ -90,7 +92,7 @@ $formAttributes['method'] = 'GET';
                             'sort' => 'orderBySet')
                         )
                     );
-                }                    
+                }
                 echo $this->formSelect(
                     "advanced[$i][type]",
                     @$rows['type'],

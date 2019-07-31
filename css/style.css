@@ -16,7 +16,7 @@
   overflow: hidden;
   padding: 0;
   position: absolute;
-  width: 1px; 
+  width: 1px;
 }
 
 #skipnav:focus {
@@ -60,6 +60,14 @@
 
 /** End Header **/
 
+/** Body **/
+
+#primary {
+    padding: 0.5em 2em;
+}
+
+/** End Body **/
+
 /** Navigation **/
 
 .ab-nav {
@@ -86,6 +94,99 @@
 }
 
 /** End Navigation **/
+
+/** Pagination **/
+
+.pagination li {
+    white-space: nowrap;
+    float: left;
+    padding-left: 4px;
+    padding-right: 4px;
+    margin: 0;
+}
+
+.pagination .page-input input {
+    width: 2.5rem;
+    text-align: center;
+    margin: 0;
+    min-height: 36px;
+    border-color: #ddd;
+    border-width: 0.0625em;
+    border-style: solid;
+}
+
+.pagination .pagination_previous a, .pagination .pagination_next a {
+    background-color: #eaeaea;
+    padding-bottom: 0.5em;
+    display: block;
+    min-height: 36px;
+    padding: 0.375em;
+    margin-bottom: 0.5em;
+    border: 0;
+    line-height: 24px;
+}
+
+.pagination_previous a, .pagination_next a {
+    text-indent: -9999px;
+    position: relative;
+    width: 36px;
+    text-align: center;
+}
+
+.pagination_next a:after, .pagination_previous a:after {
+    font-family: "FontAwesome";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
+    text-indent: 0;
+}
+
+.pagination_previous a:after {
+    content: "\f104";
+}
+
+.pagination_next a:after {
+    content: "\f105";
+}
+
+/** End Pagination **/
+
+/** Sorting **/
+
+ul#sort-links-list {
+    padding-left: 10px;
+}
+
+#sort-links-list li {
+    display: inline;
+    float: right;
+    margin-right: 10px;
+}
+
+#sort-links-list li:before {
+    content: "\2014\0020";
+}
+
+.sort-label {
+    float: left;
+}
+
+.asc a:after, .desc a:after {
+    font-family: "FontAwesome";
+}
+
+.desc a:after {
+    content: " \f0d7";
+}
+
+.asc a:after {
+    content: " \f0d8";
+}
+
+/** End Sorting **/
 
 /** Index **/
 .ab-index-title {
