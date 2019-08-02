@@ -188,6 +188,22 @@ ul#sort-links-list {
 
 /** End Sorting **/
 
+/** Tables **/
+
+.thead-ab {
+    background-color: #EFEFEF;
+}
+
+.table-striped-ab tbody tr:nth-of-type(even) {
+    background-color: #EFEFEF;
+}
+
+.table-striped-ab {
+    font-size: small;
+}
+
+/** End Tables **/
+
 /** Index **/
 .ab-index-title {
     border-width: 1px;

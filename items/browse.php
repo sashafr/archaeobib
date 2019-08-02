@@ -31,8 +31,8 @@ $sortLinks[__('ID')] = 'id';
         </div>
     </div>
     <div class="row">
-        <table class="table table-striped">
-            <thead class="thead-dark">
+        <table class="table table-striped-ab">
+            <thead class="thead-ab">
                 <tr>
                     <th scope="col">Type</th>
                     <th scope="col">Mark</th>
@@ -46,12 +46,12 @@ $sortLinks[__('ID')] = 'id';
             <tbody>
                 <?php foreach (loop('items') as $item): ?>
                     <tr>
-                        <th></th>
-                        <th></th>
-                        <th><?php echo metadata('item', array('Dublin Core', 'Date')); ?></th>
-                        <th><?php echo metadata('item', array('Dublin Core', 'Creator')); ?></th>
-                        <th><?php echo metadata('item', array('Dublin Core', 'Title')); ?></th>
-                        <th>
+                        <td><?php echo $item->getItemType()->name; ?></td>
+                        <td></td>
+                        <td><?php echo metadata('item', array('Dublin Core', 'Date')); ?></td>
+                        <td><?php echo metadata('item', array('Dublin Core', 'Creator')); ?></td>
+                        <td><?php echo link_to_item(metadata('item', array('Dublin Core', 'Title'))); ?></td>
+                        <td>
                             <?php echo metadata('item', array('Dublin Core', 'Source')); ?>
                             <?php if (element_exists('Item Type Metadata', 'Book Title')): ?>
                                 <p><?php echo metadata('item', array('Item Type Metadata', 'Book Title')); ?></p>
@@ -59,8 +59,8 @@ $sortLinks[__('ID')] = 'id';
                             <?php if (element_exists('Item Type Metadata', 'Journal Title')): ?>
                                 <p><?php echo metadata('item', array('Item Type Metadata', 'Journal Title')); ?></p>
                             <?php endif; ?>
-                        </th>
-                        <th></th>
+                        </td>
+                        <td>[<?php echo explode(' ', trim(metadata('item', array('Dublin Core', 'Creator'))))[0]; ?> <?php echo metadata('item', array('Dublin Core', 'Date')); ?> #<?php echo $item->id; ?>]</td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
