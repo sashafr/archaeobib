@@ -10,10 +10,9 @@
 <script>
 
 jQuery(document).ready(function() {
-    
+
     Omeka.showAdvancedForm();
     Omeka.skipNav();
-    Omeka.megaMenu('#top-nav');
 });
 </script>
 </body>

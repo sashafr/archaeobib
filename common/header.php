@@ -1,40 +1,39 @@
 <!DOCTYPE html>
 <html lang="<?php echo get_html_lang(); ?>">
 <head>
-    
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?php if ( $description = option('description')): ?>
         <meta name="description" content="<?php echo $description; ?>" />
     <?php endif; ?>
-    <?php 
+    <?php
         if (isset($title)) {
             $titleParts[] = strip_formatting($title);
         }
         $titleParts[] = option('site_title');
     ?>
     <title><?php echo implode(' &middot; ', $titleParts); ?></title>
-    
+
     <?php echo auto_discovery_link_tags(); ?>
-    
+
     <!-- Plugin Stuff -->
     <?php fire_plugin_hook('public_head', array('view'=>$this)); ?>
-    
+
     <!-- Stylesheets -->
     <?php
-        queue_css_file(array('style'));
+        queue_css_file(array('style', 'fontawesome.min'));
         queue_css_url("https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css");
-        queue_css_url("https://use.fontawesome.com/releases/v5.5.0/css/all.css");
         echo head_css();
     ?>
-    
+
     <!-- JavaScripts -->
-    <?php 
+    <?php
         queue_js_file(array('globals'));
         queue_js_url('https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js');
-        echo head_js(); 
+        echo head_js();
     ?>
-    
+
         <!-- Matomo -->
     <script type="text/javascript">
       var _paq = _paq || [];
@@ -50,14 +49,14 @@
       })();
     </script>
     <!-- End Matomo Code -->
-    
+
 </head>
 
 <?php echo body_tag(array('id' => @$bodyid, 'class' => @$bodyclass.' ab-body')); ?>
 
     <a href="#content" id="skipnav"><?php echo __('Skip to main content'); ?></a>
     <?php fire_plugin_hook('public_body', array('view'=>$this)); ?>
-    
+
     <header>
         <?php fire_plugin_hook('public_header', array('view'=>$this)); ?>
         <div class="container-fluid">
@@ -68,13 +67,13 @@
                 <div class="col-sm-2">
                     <?php if (get_theme_option('Help Link')): ?>
                         <a href="<?php echo url(get_theme_option('Help Link')); ?>"><button type="button" class="btn btn-info btn-sm ab-header-button">Help</button></a>
-                    <?php endif; ?>                     
+                    <?php endif; ?>
                     <?php if(current_user()): ?>
                         <a href="<?php echo url('users/logout'); ?>"><button type="button" class="btn btn-secondary btn-sm ab-header-button">Logoff</button></a>
                     <?php else: ?>
                         <a href="<?php echo url('users/login'); ?>"><button type="button" class="btn btn-secondary btn-sm ab-header-button">Login</button></a>
-                    <?php endif; ?>                    
-                </div>                
+                    <?php endif; ?>
+                </div>
             </div>
         </div>
         <div class="container-fluid ab-header-tabs">

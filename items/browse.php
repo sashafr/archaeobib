@@ -4,6 +4,7 @@ echo head(array('title' => $pageTitle, 'bodyclass' => 'items browse'));
 
 $sortLinks[__('Title')] = 'Dublin Core,Title';
 $sortLinks[__('Authors')] = 'Dublin Core,Creator';
+$sortLinks[__('Source')] = 'Dublin Core,Source';
 $sortLinks[__('Year')] = 'Dublin Core,Date';
 $sortLinks[__('ID')] = 'id';
 ?>
@@ -35,7 +36,9 @@ $sortLinks[__('ID')] = 'id';
             <thead class="thead-ab">
                 <tr>
                     <th scope="col">Type</th>
-                    <th scope="col">Mark</th>
+                    <?php if(current_user()): ?>
+                        <th scope="col">Mark</th>
+                    <?php endif; ?>
                     <th scope="col">Year</th>
                     <th scope="col">Authors</th>
                     <th scope="col">Title</th>
@@ -47,7 +50,9 @@ $sortLinks[__('ID')] = 'id';
                 <?php foreach (loop('items') as $item): ?>
                     <tr>
                         <td><?php echo $item->getItemType()->name; ?></td>
-                        <td></td>
+                        <?php if(current_user()): ?>
+                            <td><?php fire_plugin_hook('public_items_browse_each', array('view' => $this, 'item' => $item)); ?></td>
+                        <?php endif; ?>
                         <td><?php echo metadata('item', array('Dublin Core', 'Date')); ?></td>
                         <td><?php echo metadata('item', array('Dublin Core', 'Creator')); ?></td>
                         <td><?php echo link_to_item(metadata('item', array('Dublin Core', 'Title'))); ?></td>
@@ -67,3 +72,5 @@ $sortLinks[__('ID')] = 'id';
         </table>
     </div>
 </div>
+
+<?php echo foot(); ?>

@@ -19,7 +19,11 @@
       }
   	  echo "<ul>";
   	  foreach ($elementValues as $elementVal) {
-      	  echo '<li><a href="' . url('items/browse?search=&advanced%5B0%5D%5Bjoiner%5D=and&advanced%5B0%5D%5Belement_id%5D='. $elementFilter->id . '&advanced%5B0%5D%5Btype%5D=is+exactly&advanced%5B0%5D%5Bterms%5D=' . $elementVal["TEXT"]) . '">' . $elementVal["TEXT"] . '</a></li>';
+          if ( $elementVal["TEXT"] == '') {
+              echo '<li><a href="' . url('items/browse?search=&advanced%5B0%5D%5Bjoiner%5D=and&advanced%5B0%5D%5Belement_id%5D='. $elementFilter->id . '&advanced%5B0%5D%5Btype%5D=is+exactly&advanced%5B0%5D%5Bterms%5D=' . $elementVal["TEXT"]) . '">' . '[none]</a></li>';
+          } else {
+              echo '<li><a href="' . url('items/browse?search=&advanced%5B0%5D%5Bjoiner%5D=and&advanced%5B0%5D%5Belement_id%5D='. $elementFilter->id . '&advanced%5B0%5D%5Btype%5D=is+exactly&advanced%5B0%5D%5Bterms%5D=' . $elementVal["TEXT"]) . '">' . $elementVal["TEXT"] . '</a></li>';
+          }
       }
       echo "</ul>";
     }

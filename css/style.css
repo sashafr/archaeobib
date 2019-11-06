@@ -134,7 +134,6 @@
 }
 
 .pagination_next a:after, .pagination_previous a:after {
-    font-family: "FontAwesome";
     position: absolute;
     left: 0;
     top: 0;
@@ -145,11 +144,11 @@
 }
 
 .pagination_previous a:after {
-    content: "\f104";
+    content: url(../images/left-arrow.png);
 }
 
 .pagination_next a:after {
-    content: "\f105";
+    content: url(../images/right-arrow.png);
 }
 
 /** End Pagination **/
@@ -174,16 +173,22 @@ ul#sort-links-list {
     float: left;
 }
 
-.asc a:after, .desc a:after {
-    font-family: "FontAwesome";
-}
-
 .desc a:after {
-    content: " \f0d7";
+    content: url(../images/dropdown-arrow.png);
+    width: 10px;
+    height: 10px;
+    display: inline-block;
+    line-height: 10px;
+    margin: 0 0 0 5px;
 }
 
 .asc a:after {
-    content: " \f0d8";
+    content: url(../images/dropup-arrow.png);
+    width: 10px;
+    height: 10px;
+    display: inline-block;
+    line-height: 10px;
+    margin: 0 0 0 5px;
 }
 
 /** End Sorting **/
@@ -240,6 +245,22 @@ ul#sort-links-list {
 
 /** End Index **/
 
+/** Posters **/
+
+.table-striped-ab button, .table-striped-ab ul {
+    font-size: small;
+}
+
+.ab-add-to-poster {
+    content: url(../images/add.png);
+    width: 10px;
+    height: 10px;
+    display: inline-block;
+    line-height: 10px;
+    margin: 0 0 0 5px;
+}
+/** End Posters **/
+
 /** Random Stuff **/
 
 @media only screen and (max-width: 768px) {
@@ -252,6 +273,10 @@ ul#sort-links-list {
 
 .ab-index-hide {
     display: none;
+}
+
+.ab-table th {
+    text-align: right;
 }
 
 /** End Random **/
