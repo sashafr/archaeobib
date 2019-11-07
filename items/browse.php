@@ -2,20 +2,29 @@
 $pageTitle = __('Browse Records');
 echo head(array('title' => $pageTitle, 'bodyclass' => 'items browse'));
 
+$sortLinks[__('Source')] = 'Dublin Core,Source';
 $sortLinks[__('Title')] = 'Dublin Core,Title';
 $sortLinks[__('Authors')] = 'Dublin Core,Creator';
-$sortLinks[__('Source')] = 'Dublin Core,Source';
 $sortLinks[__('Year')] = 'Dublin Core,Date';
 $sortLinks[__('ID')] = 'id';
 ?>
 
 <div class="container-fluid">
-    <?php if (get_theme_option('Items Browse Text')): ?>
-        <div>
-            <?php echo get_theme_option('Items Browse Text'); ?>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <p class="ab-index-title">
+                <strong>Search Results</strong>
+            </p>
+            <?php if (get_theme_option('Items Browse Text')): ?>
+                <div class="ab-header-text">
+                    <?php echo get_theme_option('Items Browse Text'); ?>
+                </div>
+                <hr />
+            <? endif; ?>
         </div>
-        <hr />
-    <? endif; ?>
+    </div>
+
     <div class="row justify-content-between">
         <div class="col-md-3">
             <?php echo pagination_links(); ?>

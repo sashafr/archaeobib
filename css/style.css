@@ -279,4 +279,29 @@ ul#sort-links-list {
     text-align: right;
 }
 
+.ab-tags {
+    padding: 3rem 6rem !important;
+}
+
+.ab-tags li {
+    list-style: none;
+}
+
+.ab-tags .count {
+    color: #212529;
+    background-color: #dfe8f1;
+    display: inline-block;
+    padding: .25em .4em;
+    font-weight: 700;
+    line-height: 1;
+    vertical-align: baseline;
+    border-radius: .25rem;
+    margin: .25em;
+}
+
+.ab-header-text {
+    margin: 1rem;
+    padding-bottom: 0.5rem;
+}
+
 /** End Random **/
