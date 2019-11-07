@@ -6,6 +6,13 @@ else:
                                           'action' => 'browse'));
 endif;
 $formAttributes['method'] = 'GET';
+
+// adjusting field drop down to show the alternate names for fields
+$ab_fields = get_table_options('Element', null, array(
+    'record_types' => array('Item', 'All'),
+    'sort' => 'orderBySet')
+);
+$ab_fields[39] = "Authors";
 ?>
 
 <form <?php echo tag_attributes($formAttributes); ?>>
@@ -87,10 +94,7 @@ $formAttributes['method'] = 'GET';
                             'id' => null,
                             'class' => 'advanced-search-element'
                         ),
-                        get_table_options('Element', null, array(
-                            'record_types' => array('Item', 'All'),
-                            'sort' => 'orderBySet')
-                        )
+                        $ab_fields
                     );
                 }
                 echo $this->formSelect(
