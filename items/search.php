@@ -11,17 +11,21 @@ echo head(array('title' => $pageTitle,
             <p class="ab-index-title">
                 <strong><?php echo $pageTitle; ?></strong>
             </p>
+            <?php if (!empty($_GET['element_filter'])): ?>
+                <?php if (get_theme_option('Keywords Text')): ?>
+                    <div class="ab-header-text">
+                        <?php echo get_theme_option('Keywords Text'); ?>
+                    </div>
+                    <hr />
+                <? endif; ?>
+            <?php endif; ?>
         </div>
     </div>
 
     <div class="row mt-4 mx-5">
         <div class="col-12">
             <?php if (!empty($_GET['element_filter'])): ?>
-                <div class="card bg-light">
-                    <div class="card-body">
-                        <?php echo $this->partial('items/element.php'); ?>
-                    </div>
-                </div>
+                <?php echo $this->partial('items/element.php'); ?>
             <?php else: ?>
                 <div class="row">
                     <div class="col-12">
@@ -39,7 +43,7 @@ echo head(array('title' => $pageTitle,
                                         array('id' => 'advanced-search-form'))); ?>
                             </div>
                         </div>
-                    </div>                    
+                    </div>
                 </div>
             <?php endif; ?>
 
