@@ -115,7 +115,7 @@
     border-style: solid;
 }
 
-.pagination .pagination_previous a, .pagination .pagination_next a {
+.pagination .pagination_previous a, .pagination .pagination_next a, .item-pagination .previous, .item-pagination .next {
     background-color: #eaeaea;
     padding-bottom: 0.5em;
     display: block;
@@ -126,7 +126,7 @@
     line-height: 24px;
 }
 
-.pagination_previous a, .pagination_next a {
+.pagination_previous a, .pagination_next a, .item-pagination .previous a, .item-pagination .next a {
     text-indent: -9999px;
     position: relative;
     width: 36px;
@@ -149,6 +149,18 @@
 
 .pagination_next a:after {
     content: url(../images/right-arrow.png);
+}
+
+.item-pagination li {
+    list-style: none;
+}
+
+.item-pagination .previous {
+    float: left;
+}
+
+.item-pagination .next {
+    float: right;
 }
 
 /** End Pagination **/
@@ -302,6 +314,11 @@ ul#sort-links-list {
 .ab-header-text {
     margin: 1rem;
     padding-bottom: 0.5rem;
+}
+
+.ab-item-modules {
+    padding-left: 5em;
+    padding-bottom: 2em;
 }
 
 /** End Random **/
