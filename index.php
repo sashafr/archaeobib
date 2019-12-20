@@ -1,13 +1,13 @@
 <?php echo head(); ?>
 
 <div class="container-fluid">
-    
+
     <div class="row">
         <div class="col-sm-12">
             <p class="ab-index-title"><strong>Search</strong></p>
         </div>
     </div>
-    
+
     <div class="row justify-content-between">
         <div class="col-sm-3">
             <div class="container">
@@ -29,13 +29,13 @@
             </div>
         <?php endif; ?>
     </div>
-    
+
     <div class="row">
         <div class="col-sm-12">
             <p class="ab-index-title">&nbsp;</p>
         </div>
     </div>
-    
+
     <div class="row justify-content-between">
         <div class="col-sm-6">
             <div class="container">
@@ -57,13 +57,13 @@
             </div>
         <?php endif; ?>
     </div>
-    
+
     <div class="row">
         <div class="col-sm-12">
             <p class="ab-index-title">&nbsp;</p>
         </div>
     </div>
-    
+
     <div class="row justify-content-between">
         <div class="col-sm-6">
             <div class="container">
@@ -85,7 +85,7 @@
                         <p>
                             <?php set_loop_records('collections', get_records('Collection')); ?>
                             <?php foreach (loop('collections') as $collection): ?>
-                                <?php echo link_to_collection(metadata('collection', array('Dublin Core', 'Title')), null, 'show', $collection); ?>
+                                <a href="<?php echo url('items/browse?collection='.$collection->id); ?>"><?php echo metadata('collection', 'display_title'); ?></a>
                             <?php endforeach ?>
                         </p>
                     </div>
@@ -115,7 +115,7 @@
                                 <?php foreach(range('A', 'Z') as $letter): ?>
                                     <a class="ab-index-letters" href="<?php echo url('items/search?element_filter=' . get_theme_option('Filter1') . '&letter=' . $letter); ?>"><?php echo $letter; ?></a>
                                 <?php endforeach; ?>
-                            </p>                            
+                            </p>
                         </div>
                         <div class="col-sm-4">
                             <p class="ab-index-filters"><a href="<?php echo url('items/search?element_filter=' . get_theme_option('Filter2')); ?>"><?php echo get_theme_option('Filter2'); ?></a></p>
@@ -123,13 +123,13 @@
                                 <?php foreach(range('A', 'Z') as $letter): ?>
                                     <a class="ab-index-letters" href="<?php echo url('items/search?element_filter=' . get_theme_option('Filter2') . '&letter=' . $letter); ?>"><?php echo $letter; ?></a>
                                 <?php endforeach; ?>
-                            </p>                            
+                            </p>
                         </div>
-                    </div>                    
+                    </div>
                 </div>
             </div>
         <?php endif; ?>
-    </div>     
+    </div>
 </div>
 
 <?php echo foot(); ?>
