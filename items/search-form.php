@@ -72,7 +72,11 @@ $ab_fields[39] = "Authors";
                 	foreach ($fields_array as $afield){
                     $bibElementSet = $db->getTable('Element')->fetchObjects("SELECT * FROM {$db->prefix}elements e WHERE e.name = '{$afield}'");
                     foreach($bibElementSet as $element) {
-                      $bibElements[$element->id]=$element->name;
+                        if ($ab_fields[$element->id]){
+                            $bibElements[$element->id]=$ab_fields[$element->id];
+                        } else {
+                            $bibElements[$element->id]=$element->name;                            
+                        }
                     }
                 	}
                   echo $this->formSelect(

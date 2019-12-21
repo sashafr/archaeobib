@@ -271,6 +271,26 @@ ul#sort-links-list {
     line-height: 10px;
     margin: 0 0 0 5px;
 }
+
+.poster-move-up a:after {
+    content: url(../images/dropup-arrow.png);
+}
+
+.poster-move-down a:after {
+    content: url(../images/dropdown-arrow.png);
+}
+
+.poster-move-top a:after {
+    content: url(../images/double-arrow-up.png);
+}
+
+.poster-move-bottom a:after {
+    content: url(../images/double-arrow-down.png);
+}
+
+.poster-delete a:after {
+    content: url(../images/remove.png);
+}
 /** End Posters **/
 
 /** Random Stuff **/

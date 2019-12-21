@@ -48,9 +48,9 @@ $posters = $this->posters;
                                 <?php if($this->user) : ?>
                                     <li><a href="<?php echo html_escape(url(array('action'=>'edit','id' => $poster->id), get_option('poster_page_path'))); ?>">Edit</a></li>
                                     <li><a href="<?php echo html_escape(url(array('action' => 'delete-confirm', 'id' => $poster->id),  get_option('poster_page_path'))); ?>">Delete</a></li>
-                                    <li><a href="<?php echo html_escape(url(array('action'=>'share','id' => $poster->id), get_option('poster_page_path'))); ?>">Share <?php echo $pageTitle; ?></a></li>
+                                    <!---<li><a href="<?php echo html_escape(url(array('action'=>'share','id' => $poster->id), get_option('poster_page_path'))); ?>">Share <?php echo $pageTitle; ?></a></li> -->
                                 <?php endif; ?>
-                                    <li><a href="<?php echo html_escape(url(array('action'=>'print','id' => $poster->id), get_option('poster_page_path'))); ?>" class="print" media="print" >Print</a></li>
+                                    <li><a href="<?php echo html_escape(url(array('action'=>'print','id' => $poster->id), get_option('poster_page_path'))); ?>" class="print" media="print" >Download</a></li>
                                 </ul>
                             </td>
                             <td><?php echo html_escape(format_date($poster->date_created)); ?></td>

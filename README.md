@@ -6,6 +6,7 @@ This is an [Omeka Classic](https://omeka.org/classic/) theme designed for browsi
 
 - [Guest User Plugin](https://omeka.org/classic/plugins/GuestUser/)
 - [Posters Plugin](https://omeka.org/classic/plugins/Posters/)
+- [CsvExport plugin](https://github.com/utlib/CsvExport)
 
 ### Installing
 
