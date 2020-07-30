@@ -18,7 +18,10 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
-                        <?php echo search_form(); ?>
+                        <form id="search-form" name="search-form" action="/archaeobib/items/browse" method="get" _lpchecked="1">
+                            <input type="text" name="search" id="search" value="" title="Search">
+                            <button id="submit_search" type="submit" value="Search">Search</button>
+                        </form>
                     </div>
                 </div>
             </div>

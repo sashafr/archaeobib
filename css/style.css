@@ -291,7 +291,19 @@ ul#sort-links-list {
 .poster-delete a:after {
     content: url(../images/remove.png);
 }
+
+.ab-dropdown-button {
+    border: 1px solid gray !important;
+}
 /** End Posters **/
+
+/** CSL **/
+
+.csl-entry {
+    padding: 3px 0;
+}
+
+/** End CSL **/
 
 /** Random Stuff **/
 

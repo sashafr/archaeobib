@@ -7,7 +7,249 @@
     echo queue_css_file('poster');
     echo queue_js_file('jquery.bxslider');
     echo head(array('title'=>$pageTitle));
+    $bibFormat = $_GET['format'];
 ?>
+
+<?php if($bibFormat): ?>
+
+    <script>
+
+        jQuery.get("<?php echo WEB_ROOT; ?>/themes/archaeobib/templates/<?php echo $bibFormat; ?>.csl", function(template) {
+
+            var Cite = require('citation-js')
+            <?php
+                $bibList = array();
+                $itemTypeMappings = array(
+                    "Artwork" => "graphic",
+                    "Audiovisual Material" => "song",
+                    "BAR Book" => "book",
+                    "BAR Book (Edited)" => "book",
+                    "BAR Section" => "chapter",
+                    "Book" => "book",
+                    "Book (Edited)" => "book",
+                    "Book in Series" => "book",
+                    "Book in a Series (Edited)" => "book",
+                    "Book in a Series - VN" => "book",
+                    "Book in a Series (Edited) - VN" => "book",
+                    "Book Section" => "chapter",
+                    "Book Section in a Series" => "chapter",
+                    "Book Section in a Series - NST" => "chapter",
+                    "Conference Paper" => "paper-conference",
+                    "Conference Proceeding" => "paper-conference",
+                    "Document" => "article",
+                    "Electronic Source" => "webpage",
+                    "Film or Broadcast" => "motion_picture",
+                    "Journal Article" => "article-journal",
+                    "Magazine Article" => "article-magazine",
+                    "Manuscript" => "manuscript",
+                    "Map" => "map",
+                    "Newspaper Article" => "article-newspaper",
+                    "Report" => "report",
+                    "Serial" => "book",
+                    "Thesis" => "thesis",
+                    "Thesis-Bachelor" => "thesis",
+                    "Thesis-MA" => "thesis",
+                    "Thesis-PhD" => "thesis"
+                );
+                $elementMappings = array(
+                    "Creator" => "author",
+                    "Date" => "issued",
+                    "Description" => "note",
+                    "Publisher" => "publisher",
+                    "Title" => "title",
+                    "Type" => "genre",
+                    "Abstract" => "abstract",
+                    "Date Submitted" => "submitted",
+                    "Extent" => "dimensions",
+                    "Place of Publication" => "publisher-place",
+                    "Volume" => "volume",
+                    "Edition" => "edition",
+                    "Series Title" => "collection-title",
+                    "Series Editor" => "collection-editor",
+                    "External Link" => "URL",
+                    "Call Number" => "call-number",
+                    "Section" => "section",
+                    "Scale" => "scale",
+                    "Source" => "container-title"
+                );
+                $elementArrayMappings = array(
+                    "Number" => array(
+                        "BAR Section" => "chapter-number",
+                        "Book Section" => "chapter-number",
+                        "Book Section in a Series" => "chapter-number",
+                        "Book Section in a Series - NST" => "chapter-number",
+                        "BAR Book" => "collection-number",
+                        "BAR Book (Edited)" => "collection-number",
+                        "Book" => "collection-number",
+                        "Book (Edited)" => "collection-number",
+                        "Book in Series" => "collection-number",
+                        "Book in a Series (Edited)" => "collection-number",
+                        "Book in a Series - VN" => "collection-number",
+                        "Book in a Series (Edited) - VN" => "collection-number",
+                        "Journal Article" => "issue",
+                        "Report" => "number",
+                        "Other" => "issue"
+                    ),
+                    "Editors" => array(
+                        "BAR Book" => "editor",
+                        "BAR Book (Edited)" => "editor",
+                        "BAR Section" => "container-author",
+                        "Book" => "editor",
+                        "Book (Edited)" => "editor",
+                        "Book in Series" => "editor",
+                        "Book in a Series (Edited)" => "editor",
+                        "Book in a Series - VN" => "editor",
+                        "Book in a Series (Edited) - VN" => "editor",
+                        "Book Section" => "container-author",
+                        "Book Section in a Series" => "container-author",
+                        "Book Section in a Series - NST" => "container-author",
+                        "Other" => "editor"
+                    )
+                );
+
+                foreach($poster->Items as $posterItem) {
+                    $thisCitation = array(
+                        "id" => $posterItem->id,
+                        "type" => $itemTypeMappings[$posterItem->getItemType()->name]
+                    );
+                    $theseElementSets = all_element_texts($posterItem, array('return_type' => "array"));
+                    $pages = "";
+                    foreach($theseElementSets as $thisElementSet) {
+                        foreach($thisElementSet as $thisElement => $thisElementText) {
+                            $cleanedText = "";
+                            if ($thisElement == "Creator" || $thisElement == "Series Editor" || $thisElement == "Editors") {
+                                $cleanedText = array();
+                                foreach($thisElementText as $authorTexts) {
+                                    $nameParts = explode(", ", $authorTexts);
+                                    if (count($nameParts) > 1) {
+                                        $authorJSON = array(
+                                            "given" => $nameParts[1],
+                                            "family" => $nameParts[0]
+                                        );
+                                    } else {
+                                        $authorJSON = array("family" => $nameParts[0]);
+                                    }
+                                    array_push($cleanedText, $authorJSON);
+                                }
+                            } else if ($thisElement == "Date") {
+                                $cleanedText = array();
+                                foreach($thisElementText as $dateText) {
+                                    array_push($cleanedText, array("date-parts" => [$dateText]));
+                                }
+                            } else if ($thisElement == "Page Start") {
+                                if (count($thisElementText) > 0) {
+                                    $pages = $thisElementText[0];
+                                }
+                            } else if ($thisElement == "Page End") {
+                                if (count($thisElementText) > 0) {
+                                    $pages = $pages . "-" . $thisElementText[0];
+                                }
+                            } else {
+                                foreach($thisElementText as $eachText) {
+                                    if ($cleanedText == "") {
+                                        $cleanedText = $eachText;
+                                    } else {
+                                        $cleanedText = $cleanedText . "; " . $eachText;
+                                    }
+                                }
+                            }
+                            if(array_key_exists($thisElement, $elementMappings)) {
+                                $cslKey = $elementMappings[$thisElement];
+                                $thisCitation[$cslKey] = $cleanedText;
+                            } else if (array_key_exists($thisElement, $elementArrayMappings)) {
+                                if (array_key_exists($posterItem->getItemType()->name, $elementArrayMappings[$thisElement])) {
+                                    $cslKey = $elementArrayMappings[$thisElement][$posterItem->getItemType()->name];
+                                } else {
+                                    $cslKey = $elementArrayMappings[$thisElement]["Other"];
+                                }
+                                $thisCitation[$cslKey] = $cleanedText;
+                            }
+                        }
+                    }
+                    if ($pages != "") {
+                        $thisCitation["page"] = $pages;
+                    }
+                    array_push($bibList, $thisCitation);
+                }
+            ?>
+            var bibList = <?php echo json_encode($bibList) ?>;
+            let cite = new Cite(bibList)
+            let templateName = '<?php echo $bibFormat; ?>';
+            Cite.plugins.config.get('@csl').templates.add(templateName, template)
+            var parseAsync = Cite.parse.input.async.chain
+
+            // Make a factory for callback
+            var callbackFactory = function (out) {
+              return function (data) {
+                out.html(cite.format('bibliography', {
+                    format: 'html',
+                    template: '<?php echo $bibFormat; ?>',
+                    lang:'en-US'
+                }))
+              }
+            }
+
+            $(function(){
+
+              // Callbacks
+              var jsonCb = callbackFactory($('#json-out'))
+
+              // Declare function to update the output
+              function update() {
+                // Set data (explicit parsing only recommended for async) and set html element to get output
+                parseAsync(bibList).then(jsonCb)
+              }
+
+              // Trigger update
+              update()
+            })
+        })
+
+        <?php
+            $xmlTemplate = file_get_contents(WEB_ROOT . "/themes/archaeobib/templates/" . $bibFormat . ".csl");
+            $xml = new SimpleXMLElement($xmlTemplate);
+            $linespacing = "normal";
+            $marginBottom = "0";
+
+            foreach ($xml->children() as $child) {
+                if ($child->getName() == 'bibliography') {
+                    $attrs = $child->attributes();
+                    if($attrs["line-spacing"]) {
+                        $linespacing = $attrs["line-spacing"];
+                    }
+                    if($attrs["entry-spacing"]) {
+                        $marginBottom = $attrs["entry-spacing"];
+                    }
+                }
+            }
+        ?>
+    </script>
+
+    <style>
+        .csl-bib-body {
+            line-height: <?php echo $linespacing; ?>;
+        }
+        .csl-entry {
+            clear: left;
+            margin-bottom: <?php echo $marginBottom; ?>em;
+        }
+        .csl-indent {
+            margin: .5em 0 0 2em;
+            padding: 0 0 .2em .5em;
+            border-left: 5px solid #ccc;
+        }
+        .csl-right-inline {
+            margin: 0 .4em 0 0;
+        }
+        .csl-left-margin {
+            float: left;
+            text-align: right;
+            padding-right: 1em;
+        }
+    </style>
+
+<?php endif; ?>
+
 
 <div class="container-fluid">
 
@@ -18,63 +260,85 @@
             </p>
             <div class="ab-header-text">
                 <?php echo $poster->description; ?>
-                <?php if ($this->currentUser): ?>
-                    <div class="edit-link">
-                        <a href="<?php echo html_escape(url(array('action' => 'edit','id' => $poster->id), get_option('poster_page_path'))); ?>" class="edit-poster-link">Edit</a> |
-                        <a href="<?php echo html_escape(url(array('action'=>'print','id' => $poster->id), get_option('poster_page_path'))); ?>" class="print" media="print" >Download</a>
+                <div class="row justify-content-between">
+                    <div class="col-md-3">
+                        <?php if ($this->currentUser): ?>
+                            <div class="edit-link">
+                                <a href="<?php echo html_escape(url(array('action' => 'edit','id' => $poster->id), get_option('poster_page_path'))); ?>" class="edit-poster-link">Edit</a> |
+                                <a href="<?php echo html_escape(url(array('action'=>'print','id' => $poster->id), get_option('poster_page_path'))); ?>" class="print" media="print" >Download</a>
+                            </div>
+                        <?php endif; ?>
                     </div>
-                <?php endif; ?>
-
+                    <div class="col-md-9">
+                        <div class="row justify-content-end no-gutters">
+                            <div class="col-md-auto">
+                                <div class="dropdown">
+                                    <button type="button" class="btn btn-default dropdown-toggle ab-dropdown-button" id="format-select" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <span>Bibliographic Format</span>
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="format-select">
+                                        <a class="dropdown-item" href="<?php echo $this->url(); ?>?format=american-antiquity">American Antiquity</a>
+                                        <a class="dropdown-item" href="<?php echo $this->url(); ?>">Clear Format</a>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <hr />
         </div>
     </div>
 
-    <div class="row" id="poster">
-        <table class="table table-striped-ab">
-            <thead class="thead-ab">
-                <tr>
-                    <th scope="col">Type</th>
-                    <th scope="col">Year</th>
-                    <th scope="col">Authors</th>
-                    <th scope="col">Title</th>
-                    <th scope="col">Source</th>
-                    <th scope="col">Notes</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach($poster->Items as $posterItem): ?>
+    <?php if($bibFormat): ?>
+        <div id="json-out"></div>
+    <?php else: ?>
+        <div class="row" id="poster">
+            <table class="table table-striped-ab">
+                <thead class="thead-ab">
                     <tr>
-                        <td><?php echo $posterItem->getItemType()->name; ?></td>
-                        <td><?php echo metadata($posterItem, array('Dublin Core', 'Date')); ?></td>
-                        <td><?php echo metadata($posterItem, array('Dublin Core', 'Creator')); ?></td>
-                        <td><?php echo link_to_item(metadata($posterItem, array('Dublin Core', 'Title')), null, 'show', $posterItem); ?></td>
-                        <td>
-                            <?php echo metadata($posterItem, array('Dublin Core', 'Source')); ?>
-                            <?php if (element_exists('Item Type Metadata', 'Book Title')): ?>
-                                <p><?php echo metadata($posterItem, array('Item Type Metadata', 'Book Title')); ?></p>
-                            <?php endif; ?>
-                            <?php if (element_exists('Item Type Metadata', 'Journal Title')): ?>
-                                <p><?php echo metadata($posterItem, array('Item Type Metadata', 'Journal Title')); ?></p>
-                            <?php endif; ?>
-                        </td>
-                        <td>
-                            <?php echo $posterItem->caption; ?>
-                        </td>
+                        <th scope="col">Type</th>
+                        <th scope="col">Year</th>
+                        <th scope="col">Authors</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Source</th>
+                        <th scope="col">Notes</th>
                     </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-        <?php
-             $disclaimer = get_option('poster_disclaimer');
-             if (!empty($disclaimer)):
-        ?>
-        <div id="poster-disclaimer">
-            <h2 id="poster-disclaimer-title">Disclaimer</h2>
-            <?php echo html_escape($disclaimer); ?>
-        </div>
-        <?php endif; ?>
-    </div> <!-- end poster div -->
+                </thead>
+                <tbody>
+                    <?php foreach($poster->Items as $posterItem): ?>
+                        <tr>
+                            <td><?php echo $posterItem->getItemType()->name; ?></td>
+                            <td><?php echo metadata($posterItem, array('Dublin Core', 'Date')); ?></td>
+                            <td><?php echo metadata($posterItem, array('Dublin Core', 'Creator')); ?></td>
+                            <td><?php echo link_to_item(metadata($posterItem, array('Dublin Core', 'Title')), null, 'show', $posterItem); ?></td>
+                            <td>
+                                <?php echo metadata($posterItem, array('Dublin Core', 'Source')); ?>
+                                <?php if (element_exists('Item Type Metadata', 'Book Title')): ?>
+                                    <p><?php echo metadata($posterItem, array('Item Type Metadata', 'Book Title')); ?></p>
+                                <?php endif; ?>
+                                <?php if (element_exists('Item Type Metadata', 'Journal Title')): ?>
+                                    <p><?php echo metadata($posterItem, array('Item Type Metadata', 'Journal Title')); ?></p>
+                                <?php endif; ?>
+                            </td>
+                            <td>
+                                <?php echo $posterItem->caption; ?>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+            <?php
+                 $disclaimer = get_option('poster_disclaimer');
+                 if (!empty($disclaimer)):
+            ?>
+            <div id="poster-disclaimer">
+                <h2 id="poster-disclaimer-title">Disclaimer</h2>
+                <?php echo html_escape($disclaimer); ?>
+            </div>
+            <?php endif; ?>
+        </div> <!-- end poster div -->
+    <?php endif; ?>
 </div>
 <script type="text/javascript">
     var n = jQuery('.poster-items li').length;

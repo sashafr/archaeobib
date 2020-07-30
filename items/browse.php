@@ -32,7 +32,7 @@ $sortLinks[__('ID')] = 'id';
         <div class="col-md-9">
             <div class="row justify-content-end no-gutters">
               <div class="col-md-auto">
-                <span class="sort-label"><?php echo __('Sort by: '); ?></span>
+                <span class="sort-label"><?php echo $total_results ?> results | <?php echo __('Sort by: '); ?></span>
               </div>
               <div class="col-md-auto">
                   <?php echo browse_sort_links($sortLinks); ?>

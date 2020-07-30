@@ -8,11 +8,19 @@ endif;
 $formAttributes['method'] = 'GET';
 
 // adjusting field drop down to show the alternate names for fields
+$renamed_fields = array(
+        'Creator' => 'Authors'
+);
 $ab_fields = get_table_options('Element', null, array(
     'record_types' => array('Item', 'All'),
     'sort' => 'orderBySet')
 );
-$ab_fields[39] = "Authors";
+$field_count = count($ab_fields);
+for ($i = 0; $i <= $field_count; $i++) {
+    // if (in_array($ab_fields[$i], $hidden_fields)) {
+    //     unset($ab_fields[$i]);
+    // }
+}
 ?>
 
 <form <?php echo tag_attributes($formAttributes); ?>>
@@ -75,7 +83,7 @@ $ab_fields[39] = "Authors";
                         if ($ab_fields[$element->id]){
                             $bibElements[$element->id]=$ab_fields[$element->id];
                         } else {
-                            $bibElements[$element->id]=$element->name;                            
+                            $bibElements[$element->id]=$element->name;
                         }
                     }
                 	}
@@ -109,7 +117,7 @@ $ab_fields[39] = "Authors";
                         'id' => null,
                         'class' => 'advanced-search-type'
                     ),
-                    label_table_options(array(
+                    array(
                         'contains' => __('contains'),
                         'does not contain' => __('does not contain'),
                         'is exactly' => __('is exactly'),
@@ -117,7 +125,6 @@ $ab_fields[39] = "Authors";
                         'is not empty' => __('is not empty'),
                         'starts with' => __('starts with'),
                         'ends with' => __('ends with'))
-                    )
                 );
                 echo $this->formText(
                     "advanced[$i][terms]",

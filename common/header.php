@@ -31,6 +31,7 @@
     <?php
         queue_js_file(array('globals'));
         queue_js_url('https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js');
+        queue_js_url('https://cdn.jsdelivr.net/npm/citation-js');
         echo head_js();
     ?>
 
