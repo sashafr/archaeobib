@@ -277,7 +277,11 @@
                                         <span>Bibliographic Format</span>
                                     </button>
                                     <ul class="dropdown-menu" aria-labelledby="format-select">
+                                        <a class="dropdown-item" href="<?php echo $this->url(); ?>?format=american-anthropological-association">Amer. Anth. Assoc.</a>
                                         <a class="dropdown-item" href="<?php echo $this->url(); ?>?format=american-antiquity">American Antiquity</a>
+                                        <a class="dropdown-item" href="<?php echo $this->url(); ?>?format=american-journal-of-physical-anthropology">Amer. J. of Physical Anth.</a>
+                                        <a class="dropdown-item" href="<?php echo $this->url(); ?>?format=antiquity">Antiquity</a>
+                                        <a class="dropdown-item" href="<?php echo $this->url(); ?>?format=world-archaeology">World Archaeology</a>
                                         <a class="dropdown-item" href="<?php echo $this->url(); ?>">Clear Format</a>
                                     </ul>
                                 </div>

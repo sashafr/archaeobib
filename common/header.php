@@ -24,6 +24,7 @@
     <?php
         queue_css_file(array('style', 'fontawesome.min'));
         queue_css_url("https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css");
+        queue_css_url("https://fonts.googleapis.com/css?family=Montserrat:300,300italic,400,400italic,700,700italic,900,900italic|Roboto+Slab:300,300italic,400,400italic,700,700italic,900,900italic|Open+Sans:300,300italic,400,400italic,700,700italic,900,900italic|Lato:300,300italic,400,400italic,700,700italic,900,900italic&amp;subset=latin,latin-ext");
         echo head_css();
     ?>
 

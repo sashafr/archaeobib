@@ -1,10 +1,12 @@
 /** Header **/
 
 .ab-body {
-    background-color: #F7EEDD;
+    background-color: #fff;
     margin: 1px 0 1px 0;
     color: #000000;
-    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-family: "Montserrat", sans-serif;
+    font-size: 18px;
+    font-weight: 400;
     display: block;
 }
 

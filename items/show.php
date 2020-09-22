@@ -9,8 +9,13 @@
 <?php endif; ?>
 <?php
     $elementRenames = array(
-        "Creator" => "Authors"
+        "Description" => "Notes"
     );
+    if ($item->getItemType()->name == 'Book (Edited)' || $item->getItemType()->name == 'Conference Proceeding') {
+        $elementRenames["Creator"] = "Editors";
+    } else {
+        $elementRenames["Creator"] = "Authors";
+    }
     $linkableElements = array(
         "Creator",
         "Date",

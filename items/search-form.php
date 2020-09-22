@@ -9,17 +9,21 @@ $formAttributes['method'] = 'GET';
 
 // adjusting field drop down to show the alternate names for fields
 $renamed_fields = array(
-        'Creator' => 'Authors'
+        'Creator' => 'Authors',
+        'Description' => 'Notes'
 );
 $ab_fields = get_table_options('Element', null, array(
     'record_types' => array('Item', 'All'),
     'sort' => 'orderBySet')
 );
-$field_count = count($ab_fields);
-for ($i = 0; $i <= $field_count; $i++) {
+// $field_count = count($ab_fields);
+foreach ($ab_fields as $key => $val) {
     // if (in_array($ab_fields[$i], $hidden_fields)) {
     //     unset($ab_fields[$i]);
     // }
+    if (array_key_exists($val, $renamed_fields)) {
+        $ab_fields[$key] = $renamed_fields[$val];
+    }
 }
 ?>
 

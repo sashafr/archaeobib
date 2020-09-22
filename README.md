@@ -12,6 +12,8 @@ This is an [Omeka Classic](https://omeka.org/classic/) theme designed for browsi
 
 [Follow Omega Classic’s tutorial of installing a theme](https://omeka.org/classic/docs/Admin/Appearance/Themes/).
 
+Note! For keyword page to show up on editable Item form, you need a Simple Page called "Keywords".
+
 ## Built With
 
 * [Bootstrap](https://getbootstrap.com/)
