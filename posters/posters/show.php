@@ -52,17 +52,14 @@
                     "Thesis-PhD" => "thesis"
                 );
                 $elementMappings = array(
-                    "Creator" => "author",
                     "Date" => "issued",
                     "Description" => "note",
-                    "Publisher" => "publisher",
                     "Title" => "title",
                     "Type" => "genre",
                     "Abstract" => "abstract",
                     "Date Submitted" => "submitted",
                     "Extent" => "dimensions",
                     "Place of Publication" => "publisher-place",
-                    "Volume" => "volume",
                     "Edition" => "edition",
                     "Series Title" => "collection-title",
                     "Series Editor" => "collection-editor",
@@ -104,6 +101,19 @@
                         "Book Section in a Series" => "container-author",
                         "Book Section in a Series - NST" => "container-author",
                         "Other" => "editor"
+                    ),
+                    "Creator" => array(
+                        "Book (Edited)" => "editor",
+                        "Other" => "author"
+                    ),
+                    "Volume" => array(
+                        "Book Section in a Series" => "collection-number",
+                        "Book Section in a Series - NST" => "collection-number",
+                        "Other" => "volume"
+                    ),
+                    "Publisher" => array(
+                        "Manuscript" => "archive_location",
+                        "Other" => "publisher"
                     )
                 );
 
@@ -146,10 +156,17 @@
                                 }
                             } else {
                                 foreach($thisElementText as $eachText) {
+                                    if ($thisElement == "External Link") {
+                                        if(strpos($eachText,"pdf_articles") > 0) {
+                                            // I'm omitting links to their private PDF storage
+                                            continue;
+                                        }
+                                    }
+                                    $encodingCleanedText = str_replace("&quot;", '"', str_replace("&#039;", "'", $eachText));
                                     if ($cleanedText == "") {
-                                        $cleanedText = $eachText;
+                                        $cleanedText = $encodingCleanedText;
                                     } else {
-                                        $cleanedText = $cleanedText . "; " . $eachText;
+                                        $cleanedText = $cleanedText . "; " . $encodingCleanedText;
                                     }
                                 }
                             }
@@ -168,6 +185,13 @@
                     }
                     if ($pages != "") {
                         $thisCitation["page"] = $pages;
+                    }
+                    if ($posterItem->getItemType()->name == "Thesis-PhD") {
+                        $thisCitation["genre"] = "PhD";
+                    } else if ($posterItem->getItemType()->name == "Thesis-Bachelor") {
+                        $thisCitation["genre"] = "Bachelor";
+                    } else if ($posterItem->getItemType()->name == "Thesis-MA") {
+                        $thisCitation["genre"] = "Masters";
                     }
                     array_push($bibList, $thisCitation);
                 }
@@ -210,6 +234,8 @@
             $xml = new SimpleXMLElement($xmlTemplate);
             $linespacing = "normal";
             $marginBottom = "0";
+            $hangingindent = "0";
+            $formatTitle = "";
 
             foreach ($xml->children() as $child) {
                 if ($child->getName() == 'bibliography') {
@@ -219,6 +245,16 @@
                     }
                     if($attrs["entry-spacing"]) {
                         $marginBottom = $attrs["entry-spacing"];
+                    }
+                    if ($attrs["hanging-indent"] && $attrs["hanging-indent"] == "true") {
+                        $hangingindent = "2";
+                    }
+                }
+                if ($child->getName() == 'info') {
+                    foreach ($child->children() as $infoChild) {
+                        if ($infoChild->getName() == 'title') {
+                            $formatTitle = $infoChild;
+                        }
                     }
                 }
             }
@@ -240,6 +276,9 @@
         }
         .csl-right-inline {
             margin: 0 .4em 0 0;
+            <?php if ($hangingindent != "0"): ?>
+                padding-left: <?php echo $hangingindent; ?>em;
+            <?php endif; ?>
         }
         .csl-left-margin {
             float: left;
@@ -256,7 +295,7 @@
     <div class="row">
         <div class="col-sm-12">
             <p class="ab-index-title">
-                <strong><?php echo $pageTitle; ?></strong>
+                <strong><?php echo $pageTitle; ?><?php if ($bibFormat){ echo " | Format: " . $formatTitle; }?></strong>
             </p>
             <div class="ab-header-text">
                 <?php echo $poster->description; ?>
