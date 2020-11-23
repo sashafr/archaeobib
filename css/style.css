@@ -367,4 +367,19 @@ ul#sort-links-list {
     padding-bottom: 2em;
 }
 
+#submit_search_advanced {
+    border-width: 2px;
+    background-color: #31659c;
+    color: #fff;
+    font-weight: 700;
+}
+
+#submit_search {
+    font-size: small;
+    border-width: 2px;
+    background-color: #31659c;
+    color: #fff;
+    font-weight: 700;
+}
+
 /** End Random **/

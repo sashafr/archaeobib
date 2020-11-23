@@ -29,7 +29,7 @@
         echo '<div class="card bg-light">';
         echo '<div class="card-body">';
 
-        $types = get_records('ItemType', array(), 500);
+        $types = get_records('ItemType', array('sort_field' => 'name','sort_dir' => 'a'), 500);
         echo "<ul>";
     	  foreach ($types as $type) {
         	  echo '<li><a href="browse?type=' . $type->id . '">' . $type->name . '</a></li>';

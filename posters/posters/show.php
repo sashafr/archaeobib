@@ -27,7 +27,7 @@
                     "BAR Section" => "chapter",
                     "Book" => "book",
                     "Book (Edited)" => "book",
-                    "Book in Series" => "book",
+                    "Book in a Series" => "book",
                     "Book in a Series (Edited)" => "book",
                     "Book in a Series - VN" => "book",
                     "Book in a Series (Edited) - VN" => "book",
@@ -35,7 +35,7 @@
                     "Book Section in a Series" => "chapter",
                     "Book Section in a Series - NST" => "chapter",
                     "Conference Paper" => "paper-conference",
-                    "Conference Proceeding" => "paper-conference",
+                    "Conference Proceeding" => "book",
                     "Document" => "article",
                     "Electronic Source" => "webpage",
                     "Film or Broadcast" => "motion_picture",
@@ -59,6 +59,7 @@
                     "Abstract" => "abstract",
                     "Date Submitted" => "submitted",
                     "Extent" => "dimensions",
+                    "Publisher" => "publisher",
                     "Place of Publication" => "publisher-place",
                     "Edition" => "edition",
                     "Series Title" => "collection-title",
@@ -67,7 +68,8 @@
                     "Call Number" => "call-number",
                     "Section" => "section",
                     "Scale" => "scale",
-                    "Source" => "container-title"
+                    "Source" => "container-title",
+                    "Volume" => "volume"
                 );
                 $elementArrayMappings = array(
                     "Number" => array(
@@ -104,16 +106,8 @@
                     ),
                     "Creator" => array(
                         "Book (Edited)" => "editor",
+                        "Conference Proceeding" => "editor",
                         "Other" => "author"
-                    ),
-                    "Volume" => array(
-                        "Book Section in a Series" => "collection-number",
-                        "Book Section in a Series - NST" => "collection-number",
-                        "Other" => "volume"
-                    ),
-                    "Publisher" => array(
-                        "Manuscript" => "archive_location",
-                        "Other" => "publisher"
                     )
                 );
 
@@ -124,6 +118,7 @@
                     );
                     $theseElementSets = all_element_texts($posterItem, array('return_type' => "array"));
                     $pages = "";
+                    $deptFound = "";
                     foreach($theseElementSets as $thisElementSet) {
                         foreach($thisElementSet as $thisElement => $thisElementText) {
                             $cleanedText = "";
@@ -154,10 +149,14 @@
                                 if (count($thisElementText) > 0) {
                                     $pages = $pages . "-" . $thisElementText[0];
                                 }
+                            } else if ($thisElement == "Department") {
+                                if (count($thisElementText) > 0) {
+                                    $deptFound = $thisElementText[0];
+                                }
                             } else {
                                 foreach($thisElementText as $eachText) {
                                     if ($thisElement == "External Link") {
-                                        if(strpos($eachText,"pdf_articles") > 0) {
+                                        if(stripos($eachText,"pdf_articles") > 0) {
                                             // I'm omitting links to their private PDF storage
                                             continue;
                                         }
@@ -187,11 +186,14 @@
                         $thisCitation["page"] = $pages;
                     }
                     if ($posterItem->getItemType()->name == "Thesis-PhD") {
-                        $thisCitation["genre"] = "PhD";
+                        $thisCitation["genre"] = "PhD Thesis";
                     } else if ($posterItem->getItemType()->name == "Thesis-Bachelor") {
-                        $thisCitation["genre"] = "Bachelor";
+                        $thisCitation["genre"] = "Bachelor Thesis";
                     } else if ($posterItem->getItemType()->name == "Thesis-MA") {
-                        $thisCitation["genre"] = "Masters";
+                        $thisCitation["genre"] = "Masters Thesis";
+                    }
+                    if ($deptFound != "") {
+                        $thisCitation["publisher"] = $deptFound . ", " . $thisCitation["publisher"];
                     }
                     array_push($bibList, $thisCitation);
                 }
@@ -284,6 +286,9 @@
             float: left;
             text-align: right;
             padding-right: 1em;
+            <?php if ($hangingindent != "0"): ?>
+                padding-left: <?php echo $hangingindent; ?>em;
+            <?php endif; ?>
         }
     </style>
 

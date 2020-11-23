@@ -2,7 +2,7 @@
 <style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only">
   <!-- Polyglot; journal publishes in English and Spanish -->
   <info>
-    <title>Society for American Archaeology</title>
+    <title>American Antiquity</title>
     <title-short>SAA</title-short>
     <id>http://www.zotero.org/styles/society-for-american-archaeology</id>
     <link href="http://www.zotero.org/styles/society-for-american-archaeology" rel="self"/>
@@ -28,6 +28,7 @@
     <terms>
       <term name="editor" form="verb-short">ed.</term>
       <term name="translator" form="verb-short">trans.</term>
+      <term name="container-author" form="verb">edited by</term>
     </terms>
   </locale>
   <macro name="secondary-contributors">
@@ -44,7 +45,7 @@
     <choose>
       <if type="chapter paper-conference" match="any">
         <group prefix="," delimiter=", ">
-          <names variable="editor">
+          <names variable="editor container-author">
             <label form="verb" prefix=" " suffix=" "/>
             <name and="text" delimiter=", "/>
           </names>
@@ -160,11 +161,11 @@
           </if>
         </choose>
       </if>
-      <else-if type="bill book graphic legal_case motion_picture report song" match="any">
-        <text variable="title" font-style="italic"/>
+      <else-if type="bill book graphic legal_case motion_picture song" match="any">
+        <text variable="title" font-style="italic" text-case="title"/>
       </else-if>
       <else>
-        <text variable="title"/>
+        <text variable="title" text-case="title"/>
       </else>
     </choose>
   </macro>
@@ -209,7 +210,7 @@
     <choose>
       <if type="chapter paper-conference" match="any">
         <group prefix=", ">
-          <text variable="volume" suffix=":"/>
+          <text variable="volume" suffix=":" prefix="Vol. "/>
           <text variable="page" prefix="pp. "/>
         </group>
       </if>
@@ -253,7 +254,7 @@
         <text macro="container-prefix" suffix=" "/>
       </if>
     </choose>
-    <text variable="container-title" font-style="italic"/>
+    <text variable="container-title" text-case="title" font-style="italic"/>
   </macro>
   <macro name="publisher">
     <choose>
@@ -263,6 +264,9 @@
           <text variable="publisher-place"/>
         </group>
       </if>
+      <else-if type="manuscript" match="any">
+        <text variable="publisher" prefix="Submitted to "/>
+      </else-if>
       <else>
         <group delimiter=", ">
           <text variable="publisher"/>
@@ -349,7 +353,7 @@
       </group>
     </layout>
   </citation>
-  <bibliography subsequent-author-substitute="" entry-spacing="0" line-spacing="2">
+  <bibliography subsequent-author-substitute="" entry-spacing="0" line-spacing="2" hanging-indent="true">
     <sort>
       <key macro="contributors"/>
       <key variable="issued"/>

@@ -39,7 +39,7 @@
   <locale xml:lang="en">
     <terms>
       <term name="editor" form="verb-short">ed.</term>
-      <term name="container-author" form="verb">by</term>
+      <term name="container-author" form="verb">edited by</term>
       <term name="translator" form="verb-short">trans.</term>
       <term name="editortranslator" form="verb">edited and translated by</term>
       <term name="translator" form="short">trans.</term>
@@ -164,11 +164,6 @@
         <else-if type="article-journal bill book chapter legal_case legislation motion_picture paper-conference" match="none">
           <text macro="archive"/>
         </else-if>
-      </choose>
-      <choose>
-        <if type="webpage post-weblog" match="any">
-          <date variable="issued" form="text"/>
-        </if>
       </choose>
       <choose>
         <if variable="issued" match="none">
