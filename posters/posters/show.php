@@ -8,6 +8,18 @@
     echo queue_js_file('jquery.bxslider');
     echo head(array('title'=>$pageTitle));
     $bibFormat = $_GET['format'];
+
+    function url_get_contents ($url) {
+        if (!function_exists('curl_init')){
+            die('CURL is not installed!');
+        }
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $output = curl_exec($ch);
+        curl_close($ch);
+        return $output;
+    }
 ?>
 
 <?php if($bibFormat): ?>
@@ -232,7 +244,8 @@
         })
 
         <?php
-            $xmlTemplate = file_get_contents(WEB_ROOT . "/themes/archaeobib/templates/" . $bibFormat . ".csl");
+            $xmlTemplate = url_get_contents(WEB_ROOT . "/themes/archaeobib/templates/" . $bibFormat . ".csl"); ?>
+        <?php
             $xml = new SimpleXMLElement($xmlTemplate);
             $linespacing = "normal";
             $marginBottom = "0";
