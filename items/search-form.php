@@ -146,10 +146,6 @@ foreach ($ab_fields as $key => $val) {
         <?php endforeach; ?>
         </div>
         <button type="button" class="add_search"><?php echo __('Add a Field'); ?></button>
-        <?php if (!isset($buttonText)) {
-            $buttonText = __('Search for items');
-        } ?>
-        <input type="submit" class="submit" name="submit_search" id="submit_search_advanced" value="<?php echo $buttonText ?>">
     </div>
 
     <div id="search-by-range" class="field<?php if (is_current_url(url('/'))): ?> ab-index-hide<?php endif ?>">
@@ -177,7 +173,7 @@ foreach ($ab_fields as $key => $val) {
         </div>
     </div>
 
-    <div class="field<?php if (is_current_url(url('/'))): ?> ab-index-hide<?php endif ?>">
+    <div class="field">
         <?php echo $this->formLabel('item-type-search', __('Search By Type')); ?>
         <div class="inputs">
         <?php
@@ -208,8 +204,8 @@ foreach ($ab_fields as $key => $val) {
     </div>
     <?php endif; ?>
 
-    <div class="field<?php if (is_current_url(url('/'))): ?> ab-index-hide<?php endif ?>">
-        <?php echo $this->formLabel('tag-search', __('Search By Tags')); ?>
+    <div class="field">
+        <?php echo $this->formLabel('tag-search', __('Search By Keywords')); ?>
         <div class="inputs">
         <?php
             echo $this->formText('tags', @$_REQUEST['tags'],
@@ -255,6 +251,10 @@ foreach ($ab_fields as $key => $val) {
         ?>
         </div>
     </div>
+    <?php if (!isset($buttonText)) {
+        $buttonText = __('Search for items');
+    } ?>
+    <input type="submit" class="submit" name="submit_search" id="submit_search_advanced" value="<?php echo $buttonText ?>">
 
     <?php if (!is_current_url(url('/'))): ?>
         <?php fire_plugin_hook('public_items_search', array('view' => $this)); ?>

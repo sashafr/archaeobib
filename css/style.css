@@ -386,4 +386,13 @@ ul#sort-links-list {
     padding: 1.5rem;
 }
 
+#admin-bar {
+    min-height: 2.5em;
+}
+
+.field label {
+    font-size: 14px;
+    font-weight: 700;
+}
+
 /** End Random **/

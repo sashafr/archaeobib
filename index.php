@@ -75,11 +75,11 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <p class="ab-index-subtitle"><strong>Lookup</strong></p>
-                            <p><a href="<?php echo url('items/browse?added_since='.date("Ymd", strtotime("-1 week"))); ?>">Within the Past Week</a>
+                            <p><a href="<?php echo url('items/browse?added_since='.date("Ymd", strtotime("-1 week"))); ?>">Entered within the Past Week</a>
                             <br />
-                            <a href="<?php echo url('items/browse?added_since='.date("Ymd", strtotime("-1 month"))); ?>">Within the Past Month</a>
+                            <a href="<?php echo url('items/browse?added_since='.date("Ymd", strtotime("-1 month"))); ?>">Entered within the Past Month</a>
                             <br />
-                            <a href="<?php echo url('items/browse?added_since='.date("Ymd", strtotime("-1 year"))); ?>">Within the Past Year</a></p>
+                            <a href="<?php echo url('items/browse?added_since='.date("Ymd", strtotime("-1 year"))); ?>">Entered within the Past Year</a></p>
                             <p><a href="<?php echo url('items/search?element_filter=date'); ?>">Years (All)</a>
                             <br />
                             <a href="<?php echo url('items/search?element_filter=publisher'); ?>">Publishers (All)</a>
@@ -87,12 +87,14 @@
                             <a href="<?php echo url('items/search?element_filter=type'); ?>">Reference Types (All)</a>
                             <br />
                             <a href="<?php echo url('items/browse'); ?>">All Records</a></p>
-                            <p>
-                                <?php set_loop_records('collections', get_records('Collection')); ?>
-                                <?php foreach (loop('collections') as $collection): ?>
-                                    <a href="<?php echo url('items/browse?collection='.$collection->id); ?>"><?php echo metadata('collection', 'display_title'); ?></a>
-                                <?php endforeach ?>
-                            </p>
+                            <?php if ($user = current_user()): ?>
+                                <p>
+                                    <?php set_loop_records('collections', get_records('Collection')); ?>
+                                    <?php foreach (loop('collections') as $collection): ?>
+                                        <a href="<?php echo url('items/browse?collection='.$collection->id); ?>"><?php echo metadata('collection', 'display_title'); ?></a>
+                                    <?php endforeach ?>
+                                </p>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>

@@ -20,7 +20,7 @@ $posters = $this->posters;
                     <?php endif; ?>
                     <a href="<?php echo public_url(array('controller'=> 'posters', 'action' => 'new')); ?>" class="button">Create a new <?php echo $pageTitle; ?> collection</a>
                 <?php else: ?>
-                    To create <?php echo $pageTitle; ?> collections, you must be <a href="<?php echo url('users/login'); ?>">logged in</a>. If you do not have an account, <a href="<?php echo url('guest-user/user/register'); ?>">click here to create one</a>.
+                    <?php include_once(dirname(__DIR__) . '/../guest-index.php'); ?>
                 <?php endif; ?>
             </div>
         </div>

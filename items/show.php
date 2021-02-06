@@ -75,10 +75,12 @@
                         </tbody>
                     </table>
 
-                    <!-- The following returns all of the files associated with an item. -->
-                    <div id="itemfiles" class="element ab-item-modules">
-                        <div class="element-text"><?php echo files_for_item(); ?></div>
-                    </div>
+                    <?php if ($user = current_user()): ?>
+                        <!-- The following returns all of the files associated with an item. -->
+                        <div id="itemfiles" class="element ab-item-modules">
+                            <div class="element-text"><?php echo files_for_item(); ?></div>
+                        </div>
+                    <?php endif; ?>
 
                     <!-- If the item belongs to a collection, the following creates a link to that collection. -->
                     <?php if (metadata('item', 'Collection Name')): ?>
