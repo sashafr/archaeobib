@@ -216,14 +216,20 @@
             Cite.plugins.config.get('@csl').templates.add(templateName, template)
             var parseAsync = Cite.parse.input.async.chain
 
+            function decodeHtml(html) {
+                var txt = document.createElement("textarea");
+                txt.innerHTML = html;
+                return txt.value;
+            }
+
             // Make a factory for callback
             var callbackFactory = function (out) {
               return function (data) {
-                out.html(cite.format('bibliography', {
+                out.html(decodeHtml(cite.format('bibliography', {
                     format: 'html',
                     template: '<?php echo $bibFormat; ?>',
                     lang:'en-US'
-                }))
+                })))
               }
             }
 
@@ -337,7 +343,9 @@
                                         <a class="dropdown-item" href="<?php echo $this->url(); ?>?format=american-anthropological-association">Amer. Anth. Assoc.</a>
                                         <a class="dropdown-item" href="<?php echo $this->url(); ?>?format=american-antiquity">American Antiquity</a>
                                         <a class="dropdown-item" href="<?php echo $this->url(); ?>?format=american-journal-of-physical-anthropology">Amer. J. of Physical Anth.</a>
+                                      <!--  <a class="dropdown-item" href="<?php echo $this->url(); ?>?format=anthropological-science">Anthropological Science</a> -->
                                         <a class="dropdown-item" href="<?php echo $this->url(); ?>?format=antiquity">Antiquity</a>
+                                        <a class="dropdown-item" href="<?php echo $this->url(); ?>?format=asian-perspective">Asian Perspective</a>
                                         <a class="dropdown-item" href="<?php echo $this->url(); ?>?format=world-archaeology">World Archaeology</a>
                                         <a class="dropdown-item" href="<?php echo $this->url(); ?>">Clear Format</a>
                                     </ul>
