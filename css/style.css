@@ -74,6 +74,14 @@
 
 /** End Header **/
 
+/** Footer **/
+footer {
+    border-top: 1px solid black;
+    margin: 1em;
+    padding: 0.5em;
+}
+/** End Footer **/
+
 /** Body **/
 
 #primary {

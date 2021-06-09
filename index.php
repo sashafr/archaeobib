@@ -117,7 +117,17 @@
                                 </p>
                             </div>
                             <div class="col-sm-4">
-                                <p class="ab-index-filters"><a href="<?php echo url('items/search?element_filter=' . get_theme_option('Filter1')); ?>"><?php echo get_theme_option('Filter1'); ?></a></p>
+                                <p class="ab-index-filters">
+                                    <a href="<?php echo url('items/search?element_filter=' . get_theme_option('Filter1')); ?>">
+                                        <?php
+                                            if (get_theme_option('Filter1title') != "") {
+                                                echo get_theme_option('Filter1title');
+                                            } else {
+                                                echo get_theme_option('Filter1');
+                                            }
+                                        ?>
+                                    </a>
+                                </p>
                                 <p class="ab-index-filters">
                                     <?php foreach(range('A', 'Z') as $letter): ?>
                                         <a class="ab-index-letters" href="<?php echo url('items/search?element_filter=' . get_theme_option('Filter1') . '&letter=' . $letter); ?>"><?php echo $letter; ?></a>
@@ -125,8 +135,17 @@
                                 </p>
                             </div>
                             <div class="col-sm-4">
-                                <p class="ab-index-filters"><a href="<?php echo url('items/search?element_filter=' . get_theme_option('Filter2')); ?>"><?php echo get_theme_option('Filter2'); ?></a></p>
                                 <p class="ab-index-filters">
+                                    <a href="<?php echo url('items/search?element_filter=' . get_theme_option('Filter2')); ?>">
+                                        <?php
+                                            if (get_theme_option('Filter2title') != "") {
+                                                echo get_theme_option('Filter2title');
+                                            } else {
+                                                echo get_theme_option('Filter2');
+                                            }
+                                        ?>
+                                    </a>
+                                </p>                                <p class="ab-index-filters">
                                     <?php foreach(range('A', 'Z') as $letter): ?>
                                         <a class="ab-index-letters" href="<?php echo url('items/search?element_filter=' . get_theme_option('Filter2') . '&letter=' . $letter); ?>"><?php echo $letter; ?></a>
                                     <?php endforeach; ?>
