@@ -1,39 +1,54 @@
 <?php echo head(); ?>
 
-<?php if ($user = current_user()): ?>
+<div class="container-fluid">
 
-    <div class="container-fluid">
-
-        <div class="row">
-            <div class="col-sm-12">
-                <p class="ab-index-title"><strong>Search</strong></p>
-            </div>
+    <div class="row justify-content-between align-items-center">
+        <div class="col-sm-3">
+            <img class="ab-header-image" src="<?php echo WEB_ROOT . '/files/theme_uploads/' . get_theme_option('Banner Image'); ?>" />
         </div>
-
-        <div class="row justify-content-between">
-            <div class="col-sm-3">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <p class="ab-index-subtitle"><strong>Basic Search</strong></p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <form id="search-form" name="search-form" action="/archaeobib/items/browse" method="get" _lpchecked="1">
-                                <input type="text" name="search" id="search" value="" title="Search">
-                                <button id="submit_search" type="submit" value="Search">Search</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <?php if (get_theme_option('Bsearch Text')): ?>
-                <div class="col-sm-6 ab-mobile-hide">
-                    <?php echo get_theme_option('Bsearch Text'); ?>
+        <div class="col-sm-6" id="ab-title-header">
+            <h2 id="site-title">Welcome to the <?php echo option('site_title'); ?></h2>
+            <?php if (get_theme_option('Guest Index')): ?>
+                <div id="ab-index-welcome">
+                    <?php echo get_theme_option('Guest Index'); ?>
                 </div>
             <?php endif; ?>
         </div>
+    </div>
+
+    <?php if(!current_user()): ?>
+
+        <div class="ab-row row justify-content-between">
+                <div class="col-sm-4">
+                    <?php if (get_theme_option('Home Img 1')): ?>
+                        <img class="rounded-circle" src="<?php echo WEB_ROOT . '/files/theme_uploads/' . get_theme_option('Home Img 1'); ?>" />
+                    <?php endif; ?>
+                    <a href="<?php echo url('users/login'); ?>"><h3>Login</h3></a>
+                    <p>
+                        For registered users.
+                    </p>
+                </div>
+            <div class="col-sm-4">
+                <?php if (get_theme_option('Home Img 2')): ?>
+                    <img class="rounded-circle" src="<?php echo WEB_ROOT . '/files/theme_uploads/' . get_theme_option('Home Img 2'); ?>" />
+                <?php endif; ?>
+                <a href="<?php echo url('guest-user/user/register'); ?>"><h3>Register</h3></a>
+                <p>
+                    Full functionality is only available to registered users.
+                </p>
+            </div>
+            <div class="col-sm-4">
+                <?php if (get_theme_option('Home Img 3')): ?>
+                    <img class="rounded-circle" src="<?php echo WEB_ROOT . '/files/theme_uploads/' . get_theme_option('Home Img 3'); ?>" />
+                <?php endif; ?>
+                <a href="<?php echo url('items/search'); ?>"><h3>Search as Guest</h3></a>
+                <p>
+                    Limited functionality
+                </p>
+            </div>
+        </div>
+
+    <?php else: ?>
 
         <div class="row">
             <div class="col-sm-12">
@@ -156,9 +171,7 @@
                 </div>
             <?php endif; ?>
         </div>
-    </div>
+    <?php endif; ?>
+</div>
 
-<?php else: ?>
-    <?php include_once('guest-index.php'); ?>
-<?php endif; ?>
 <?php echo foot(); ?>

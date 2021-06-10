@@ -43,31 +43,16 @@
     <a href="#content" id="skipnav"><?php echo __('Skip to main content'); ?></a>
     <?php fire_plugin_hook('public_body', array('view'=>$this)); ?>
 
-    <header class="ab-header-image" <?php echo 'style="background-image: url('.WEB_ROOT.'/files/theme_uploads/'.get_theme_option('banner_image').')"' ?>>
-        <?php fire_plugin_hook('public_header', array('view'=>$this)); ?>
-        <div class="ab-header-image-topper">
-            <div class="container-fluid">
-                <div class="row" id="ab-title-header">
-                    <div class="col-sm-10">
-                        <div id="site-title"><?php echo link_to_home_page(option('site_title')); ?></div>
-                    </div>
-                    <div class="col-sm-2">
-                        <?php if (get_theme_option('Help Link')): ?>
-                            <a href="<?php echo url(get_theme_option('Help Link')); ?>"><button type="button" class="btn btn-info btn-sm ab-header-button">Help</button></a>
-                        <?php endif; ?>
-                        <?php if(current_user()): ?>
-                            <a href="<?php echo url('users/logout'); ?>"><button type="button" class="btn btn-secondary btn-sm ab-header-button">Logoff</button></a>
-                        <?php else: ?>
-                            <a href="<?php echo url('users/login'); ?>"><button type="button" class="btn btn-secondary btn-sm ab-header-button">Login</button></a>
-                        <?php endif; ?>
-                    </div>
+    <header class="ab-header container-fluid">
+        <div class="ab-header-logo">
+            <div class="row">
+                <div class="col-sm-3">
+                    <?php echo link_to_home_page(theme_logo()); ?>
                 </div>
-            </div>
-            <div class="container-fluid ab-header-tabs">
-                <div class="row">
-                    <div class="col-sm-12">
+                <div class="col-sm-9">
+                    <nav id="top-nav" role="navigation">
                         <?php echo public_nav_main()->setUlClass('ab-nav'); ?>
-                    </div>
+                    </nav>
                 </div>
             </div>
         </div>
