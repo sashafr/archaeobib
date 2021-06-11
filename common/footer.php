@@ -1,4 +1,4 @@
-<footer role="contentinfo">
+<footer class="ab-footer">
 
     <div id="footer-text">
         <?php echo get_theme_option('Footer Text'); ?>

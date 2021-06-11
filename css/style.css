@@ -3,6 +3,7 @@
 html, body {
   height: 100%;
 }
+
 body {
   display: flex;
   flex-direction: column;
@@ -11,10 +12,17 @@ body {
 .ab-body {
     background-color: #fff;
     color: #000000;
-    font-family: "Montserrat", sans-serif;
+    font-family: "Montserrat", sans-serif!important;
     font-size: 18px;
     font-weight: 400;
-    display: block;
+}
+
+input {
+    font-family: "Montserrat", sans-serif!important;
+}
+
+.btn-light {
+    background-color: #dcdee1!important;
 }
 
 #skipnav {
@@ -92,7 +100,7 @@ body {
 /** End Header **/
 
 /** Footer **/
-footer {
+.ab-footer {
     background-color: #373432;
     padding: 1em;
     color: #737170;
@@ -431,18 +439,14 @@ ul#sort-links-list {
 }
 
 #submit_search_advanced {
-    border-width: 2px;
-    background-color: #31659c;
+    background-color: #f15d2f;
     color: #fff;
-    font-weight: 700;
 }
 
 #submit_search {
     font-size: small;
-    border-width: 2px;
-    background-color: #31659c;
+    background-color: #f15d2f;
     color: #fff;
-    font-weight: 700;
 }
 
 .guest-index {
@@ -463,4 +467,9 @@ ul#sort-links-list {
     max-height: 140px;
 }
 
+a {
+    color: #f15d2f!important;
+}
+
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6
 /** End Random **/
