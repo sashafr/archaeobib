@@ -4,19 +4,42 @@ echo head(array('title' => $pageTitle,
            'bodyclass' => 'items advanced-search'));
 ?>
 
-<?php if ($user = current_user()): ?>
 
-    <div class="container-fluid">
 
+<div class="container-fluid">
+
+    <?php if (!empty($_GET['element_filter'])): ?>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <p class="ab-index-title">
+                    <strong><?php echo $pageTitle; ?></strong>
+                </p>
+                <?php if (get_theme_option('Keywords Text')): ?>
+                    <div class="ab-header-text">
+                        <?php echo get_theme_option('Keywords Text'); ?>
+                    </div>
+                    <hr />
+                <? endif; ?>
+            </div>
+        </div>
+
+        <div class="row mt-4 mx-5">
+            <div class="col-12">
+                <?php echo $this->partial('items/element.php'); ?>
+            </div>
+        </div>
+
+    <?php else: ?>
         <div class="row">
             <div class="col-sm-12">
                 <p class="ab-index-title"><strong>Search</strong></p>
             </div>
         </div>
 
-        <div class="row justify-content-between">
-            <div class="col-sm-3">
-                <div class="container">
+        <div class="row justify-content-left">
+            <div class="col-sm-12">
+                <div class="container p-md-5 rounded bg-light">
                     <div class="row">
                         <div class="col-sm-12">
                             <p class="ab-index-subtitle"><strong>Basic Search</strong></p>
@@ -30,24 +53,17 @@ echo head(array('title' => $pageTitle,
                             </form>
                         </div>
                     </div>
-                </div>
-            </div>
-            <?php if (get_theme_option('Bsearch Text')): ?>
-                <div class="col-sm-6 ab-mobile-hide">
-                    <?php echo get_theme_option('Bsearch Text'); ?>
-                </div>
-            <?php endif; ?>
-        </div>
+                    <?php if (get_theme_option('Bsearch Text')): ?>
+                        <div class="col-sm-6 ab-mobile-hide">
+                            <?php echo get_theme_option('Bsearch Text'); ?>
+                        </div>
+                    <?php endif; ?>
 
-        <div class="row">
-            <div class="col-sm-12">
-                <p class="ab-index-title">&nbsp;</p>
-            </div>
-        </div>
-
-        <div class="row justify-content-between">
-            <div class="col-sm-6">
-                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <p class="ab-index-title">&nbsp;</p>
+                        </div>
+                    </div>                    
                     <div class="row">
                         <div class="col-sm-12">
                             <p class="ab-index-subtitle"><strong>Advanced Search</strong></p>
@@ -160,9 +176,7 @@ echo head(array('title' => $pageTitle,
                 </div>
             <?php endif; ?>
         </div>
-    </div>
+    <?php endif; ?>
+</div>
 
-<?php else: ?>
-    <?php include_once('guest-index.php'); ?>
-<?php endif; ?>
 <?php echo foot(); ?>

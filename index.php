@@ -2,21 +2,21 @@
 
 <div class="container-fluid">
 
-    <div class="row justify-content-between align-items-center">
-        <div class="col-sm-3">
-            <img class="ab-header-image" src="<?php echo WEB_ROOT . '/files/theme_uploads/' . get_theme_option('Banner Image'); ?>" />
-        </div>
-        <div class="col-sm-6" id="ab-title-header">
-            <h2 id="site-title">Welcome to the <?php echo option('site_title'); ?></h2>
-            <?php if (get_theme_option('Guest Index')): ?>
-                <div id="ab-index-welcome">
-                    <?php echo get_theme_option('Guest Index'); ?>
-                </div>
-            <?php endif; ?>
-        </div>
-    </div>
-
     <?php if(!current_user()): ?>
+
+        <div class="row justify-content-between align-items-center">
+            <div class="col-sm-3">
+                <img class="ab-header-image" src="<?php echo WEB_ROOT . '/files/theme_uploads/' . get_theme_option('Banner Image'); ?>" />
+            </div>
+            <div class="col-sm-6" id="ab-title-header">
+                <h2 id="site-title">Welcome to the <?php echo option('site_title'); ?></h2>
+                <?php if (get_theme_option('Guest Index')): ?>
+                    <div id="ab-index-welcome">
+                        <?php echo get_theme_option('Guest Index'); ?>
+                    </div>
+                <?php endif; ?>
+            </div>
+        </div>
 
         <div class="ab-row row justify-content-between">
                 <div class="col-sm-4">
@@ -48,17 +48,51 @@
             </div>
         </div>
 
+        <div class="ab-row row justify-content-between align-items-center">
+            <div class="col-sm-12" id="ab-title-header">
+                <h3>For users of the old Southeast Asian Archaeology Bibliographic Database:</h3>
+                <p>
+                    The new Database has some changes from the old program. As noted above, you can now search for references without creating a login, but if you want to maintain Marked Collections (now called My Lists), you must log in. You can now create and maintain as many My Lists as you please. Your login and password for the old site have not been transferred, so you must create a new login and password.
+                </p>
+            </div>
+        </div>
+
     <?php else: ?>
 
         <div class="row">
             <div class="col-sm-12">
-                <p class="ab-index-title">&nbsp;</p>
+                <p>&nbsp;</p>
             </div>
         </div>
 
-        <div class="row justify-content-between">
-            <div class="col-sm-6">
-                <div class="container">
+        <div class="row justify-content-left">
+            <div class="col-sm-12">
+                <div class="container p-md-5 rounded bg-light">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <p class="ab-index-subtitle"><strong>Basic Search</strong></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <form id="search-form" name="search-form" action="/archaeobib/items/browse" method="get" _lpchecked="1">
+                                <input type="text" name="search" id="search" value="" title="Search">
+                                <button id="submit_search" type="submit" value="Search">Search</button>
+                            </form>
+                        </div>
+                    </div>
+                    <?php if (get_theme_option('Bsearch Text')): ?>
+                        <div class="col-sm-6 ab-mobile-hide">
+                            <?php echo get_theme_option('Bsearch Text'); ?>
+                        </div>
+                    <?php endif; ?>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <p class="ab-index-title">&nbsp;</p>
+                        </div>
+                    </div>
+
                     <div class="row">
                         <div class="col-sm-12">
                             <p class="ab-index-subtitle"><strong>Advanced Search</strong></p>

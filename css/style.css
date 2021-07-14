@@ -441,6 +441,7 @@ ul#sort-links-list {
 #submit_search_advanced {
     background-color: #f15d2f;
     color: #fff;
+    float: right;
 }
 
 #submit_search {
