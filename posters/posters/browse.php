@@ -20,7 +20,7 @@ $posters = $this->posters;
                     <?php endif; ?>
                     <a href="<?php echo public_url(array('controller'=> 'posters', 'action' => 'new')); ?>" class="button">Create a new <?php echo $pageTitle; ?> collection</a>
                 <?php else: ?>
-                    <?php include_once(dirname(__DIR__) . '/../guest-index.php'); ?>
+                    Marked Lists are only available to registered users: <a href="<?php echo url('users/login'); ?>">Login</a> or <a href="<?php echo url('guest-user/user/register'); ?>">Register</a>
                 <?php endif; ?>
             </div>
         </div>

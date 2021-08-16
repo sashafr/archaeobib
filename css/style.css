@@ -1,6 +1,6 @@
 /** Header **/
 
-html, body {
+html {
   height: 100%;
 }
 
@@ -80,8 +80,10 @@ input {
 
 
 .ab-header {
-	border-bottom: 1px solid black;
+    border-bottom: 1px solid black;
     padding-bottom: 0.5rem;
+    background-color: #fff;
+
 }
 
 .ab-header-image-topper {
@@ -94,7 +96,10 @@ input {
 
 .ab-header-image {
     max-width: 500px;
-    padding-top: 2rem;
+    max-height: 400px;
+    padding: 2rem;
+    display: block;
+    margin: auto;
 }
 
 /** End Header **/

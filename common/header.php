@@ -43,7 +43,7 @@
     <a href="#content" id="skipnav"><?php echo __('Skip to main content'); ?></a>
     <?php fire_plugin_hook('public_body', array('view'=>$this)); ?>
 
-    <header class="ab-header container-fluid">
+    <header class="ab-header sticky-top container-fluid">
         <div class="ab-header-logo">
             <div class="row">
                 <div class="col-sm-3">
@@ -51,6 +51,11 @@
                 </div>
                 <div class="col-sm-9">
                     <nav id="top-nav" role="navigation">
+                        <?php if(!current_user()): ?>
+                          <ul class="ab-nav">
+                            <li><a href="<?php echo url('users/login'); ?>">Login</a></li>
+                          </ul>
+                        <?php endif; ?>
                         <?php echo public_nav_main()->setUlClass('ab-nav'); ?>
                     </nav>
                 </div>

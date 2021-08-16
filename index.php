@@ -5,10 +5,10 @@
     <?php if(!current_user()): ?>
 
         <div class="row justify-content-between align-items-center">
-            <div class="col-sm-3">
+            <div class="col-sm-6">
                 <img class="ab-header-image" src="<?php echo WEB_ROOT . '/files/theme_uploads/' . get_theme_option('Banner Image'); ?>" />
             </div>
-            <div class="col-sm-6" id="ab-title-header">
+            <div class="col-sm-6">
                 <h2 id="site-title">Welcome to the <?php echo option('site_title'); ?></h2>
                 <?php if (get_theme_option('Guest Index')): ?>
                     <div id="ab-index-welcome">
@@ -18,14 +18,14 @@
             </div>
         </div>
 
-        <div class="ab-row row justify-content-between">
+        <div class="ab-row row justify-content-between" style="margin-top: 0; padding: 0; border-top: none;">
                 <div class="col-sm-4">
                     <?php if (get_theme_option('Home Img 1')): ?>
                         <img class="rounded-circle" src="<?php echo WEB_ROOT . '/files/theme_uploads/' . get_theme_option('Home Img 1'); ?>" />
                     <?php endif; ?>
                     <a href="<?php echo url('users/login'); ?>"><h3>Login</h3></a>
                     <p>
-                        For registered users.
+                        For registered users
                     </p>
                 </div>
             <div class="col-sm-4">
@@ -34,7 +34,7 @@
                 <?php endif; ?>
                 <a href="<?php echo url('guest-user/user/register'); ?>"><h3>Register</h3></a>
                 <p>
-                    Full functionality is only available to registered users.
+                    Full functionality is only available to registered users
                 </p>
             </div>
             <div class="col-sm-4">
@@ -48,12 +48,11 @@
             </div>
         </div>
 
-        <div class="ab-row row justify-content-between align-items-center">
-            <div class="col-sm-12" id="ab-title-header">
-                <h3>For users of the old Southeast Asian Archaeology Bibliographic Database:</h3>
-                <p>
-                    The new Database has some changes from the old program. As noted above, you can now search for references without creating a login, but if you want to maintain Marked Collections (now called My Lists), you must log in. You can now create and maintain as many My Lists as you please. Your login and password for the old site have not been transferred, so you must create a new login and password.
-                </p>
+        <div class="ab-row row justify-content-between align-items-center" style="margin-top: 0; padding: 0; border-top: none;">
+            <div class="col-sm-12">
+                <div class="alert alert-secondary" role="alert">
+                    <strong>For users of the old Southeast Asian Archaeology Bibliographic Database:</strong> The new database has some changes from the old program. As noted above, you can now search for references without creating a login, but if you want to maintain Marked Collections (now called My Lists), you must log in. You can now create and maintain as many My Lists as you please. Your login and password for the old site have not been transferred, so you must create a new login and password.
+                </div>
             </div>
         </div>
 

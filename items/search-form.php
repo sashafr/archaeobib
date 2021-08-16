@@ -77,7 +77,7 @@ foreach ($ab_fields as $key => $val) {
                                 'or' => __('OR'),
                             )
                         );
-                        if (is_current_url(url('/')) and get_theme_option('Asearch Fields') != "") {
+                        if (get_theme_option('Asearch Fields') != "") {
                         	// $bibElementSet= get_record('ElementSet',array('name'=>"Item Type Metadata"));
                         	$asearch_fields = get_theme_option('Asearch Fields');
                         	$fields_array = array_map('trim', explode(',', $asearch_fields));
