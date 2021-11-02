@@ -15,7 +15,7 @@ echo head(array('title' => $pageTitle,
                 <p class="ab-index-title">
                     <strong><?php echo $pageTitle; ?></strong>
                 </p>
-                <?php if (get_theme_option('Keywords Text')): ?>
+                <?php if (get_theme_option('Keywords Text') && $_GET['element_filter'] != 'type'): ?>
                     <div class="ab-header-text">
                         <?php echo get_theme_option('Keywords Text'); ?>
                     </div>
@@ -63,7 +63,7 @@ echo head(array('title' => $pageTitle,
                         <div class="col-sm-12">
                             <p class="ab-index-title">&nbsp;</p>
                         </div>
-                    </div>                    
+                    </div>
                     <div class="row">
                         <div class="col-sm-12">
                             <p class="ab-index-subtitle"><strong>Advanced Search</strong></p>

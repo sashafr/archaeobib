@@ -56,12 +56,21 @@
 
                   <p id="poster-no-items-yet" <?php echo $noItems; ?>>You have not added any items to this collection yet.</p>
 
+                  <div id="submit-poster">
+                      <input style="color:#fff;background-color:#f15d2f;" type="submit" name="save_poster" value="Save" > or
+                      <?php if (is_admin_theme()): ?>
+                          <a href="<?php echo html_escape(url(array('action'=>'discard'), get_option('poster_page_path'))); ?>">Discard Changes and Return to <?php echo $posterName; ?> Administration</a>
+                      <?php else: ?>
+                          <a href="<?php echo html_escape(url(array('action'=> 'discard'), get_option('poster_page_path'))); ?>">Discard Changes and Return to the Dashboard</a>
+                      <?php endif ?>
+                      <input type="hidden" name="itemCount" value="<?php echo count($poster->Items); ?>" id="itemCount"/>
+                  </div>
+
                   <div id="poster-canvas" <?php echo $noItems; ?>>
                       <table class="table table-striped-ab" id="poster-items">
                           <thead class="thead-ab">
                               <tr>
-                                  <th scope="col" id="poster-item-title-col">Title</th>
-                                  <th scope="col">Authors</th>
+                                  <th scope="col" id="poster-item-title-col">Citation</th>
                                   <th scope="col" id="poster-item-caption-col">Notes</th>
                               </tr>
                           </thead>
@@ -82,16 +91,6 @@
                       <button type="button" id="add-item-button" disabled="disabled">Add an item &rarr;</button>
                           <p>You have to add notes or tags to an item before adding them to a list</p>
                   <?php endif; ?>
-                  </div>
-
-                  <div id="submit-poster">
-                      <input type="submit" name="save_poster" value="Save <?php echo $posterName; ?>" > or
-                      <?php if (is_admin_theme()): ?>
-                          <a href="<?php echo html_escape(url(array('action'=>'discard'), get_option('poster_page_path'))); ?>">Discard Changes and Return to <?php echo $posterName; ?> Administration</a>
-                      <?php else: ?>
-                          <a href="<?php echo html_escape(url(array('action'=> 'discard'), get_option('poster_page_path'))); ?>">Discard Changes and Return to the Dashboard</a>
-                      <?php endif ?>
-                      <input type="hidden" name="itemCount" value="<?php echo count($poster->Items); ?>" id="itemCount"/>
                   </div>
 
               </form>

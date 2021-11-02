@@ -180,7 +180,7 @@ foreach ($ab_fields as $key => $val) {
         </div>
     </div>
 
-    <div id="search-by-range" class="field ab-index-hide">
+    <div id="search-by-range" class="field">
         <?php echo $this->formLabel('range', __('Search by a range of ID#s (example: 1-4, 156, 79)')); ?>
         <div class="inputs">
         <?php

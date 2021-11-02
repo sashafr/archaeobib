@@ -80,6 +80,11 @@ $sortLinks[__('ID')] = 'id';
               </tbody>
           </table>
       </div>
+      <div class="row justify-content-between">
+          <div class="col-md-3">
+              <?php echo pagination_links(); ?>
+          </div>
+      </div>
   </div>
 
 <?php echo foot(); ?>

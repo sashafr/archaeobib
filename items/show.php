@@ -1,12 +1,14 @@
 <?php echo head(array('title' => metadata('item', array('Dublin Core', 'Title')), 'bodyclass' => 'items show')); ?>
 
-<?php if(current_user()): ?>
-    <div class="row mt-4 mx-5 justify-content-end">
-        <div class="col-md-2">
+<div class="row mt-4 mx-5 justify-content-end">
+    <div class="col-md-3">
+        <?php if(is_allowed('Items', 'edit')): ?>
             <a href="<?php echo admin_url(); ?>"><button type="button" class="btn btn-info btn-sm ab-header-button">Edit</button></a>
-        </div>
+        <?php endif; ?>
+        <a target="_blank" href="<?php echo url('contact'); ?>"><button type="button" class="btn btn-light btn-sm ab-header-button">Report Error</button></a>
     </div>
-<?php endif; ?>
+</div>
+
 <?php
     $elementRenames = array(
         "Description" => "Notes"
@@ -54,13 +56,15 @@
                         <?php foreach (all_element_texts($item, array('return_type' => 'array')) as $elementset => $elements): ?>
                             <?php foreach ($elements as $element => $elementtexts): ?>
                                 <!-- Only show availability if user is logged in -->
-                                <?php if ($user = current_user() || $element != "Availability"): ?>
+                                <?php if (($element == "External Link" && $user = current_user()) || ($element != "Availability" && $element != "External Link")): ?>
                                     <tr>
                                         <th scope="row"><?php if (array_key_exists($element, $elementRenames)): echo $elementRenames[$element]; else: echo $element; endif; ?>:</th>
                                         <td>
                                             <?php foreach ($elementtexts as $elementtext): ?>
                                                 <?php if ($element == "External Link"): ?>
-                                                    <?php echo '<a href="' . $elementtext . '">' . $elementtext . '</a>' ?>
+                                                    <?php if ($user = current_user()): ?>
+                                                        <?php echo '<a target="_blank" href="' . $elementtext . '">' . $elementtext . '</a>' ?>
+                                                    <?php endif; ?>
                                                 <?php elseif (in_array($element, $linkableElements)): ?>
                                                     <?php $elementLookup = get_record('Element', array('name' => $element)); ?>
                                                     <?php echo '<a href="' . url('items/browse?search=&advanced%5B0%5D%5Bjoiner%5D=and&advanced%5B0%5D%5Belement_id%5D='. $elementLookup->id  . '&advanced%5B0%5D%5Btype%5D=is+exactly&advanced%5B0%5D%5Bterms%5D=' . $elementtext) . '">' . $elementtext . '</a>'; ?></br>
@@ -79,7 +83,7 @@
                 <?php if ($user = current_user()): ?>
                     <!-- The following returns all of the files associated with an item. -->
                     <div id="itemfiles" class="element ab-item-modules">
-                        <div class="element-text"><?php echo files_for_item(); ?></div>
+                        <div class="element-text"><?php echo files_for_item(array('linkAttributes' => array('target' => '_blank'))); ?></div>
                     </div>
                 <?php endif; ?>
 
