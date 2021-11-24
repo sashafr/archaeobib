@@ -77,7 +77,7 @@
                     "Series Title" => "collection-title",
                     "Series Editor" => "collection-editor",
                     "External Link" => "URL",
-                    "Identifier" => "URL",
+                    "Identifier" => "DOI",
                     "Call Number" => "call-number",
                     "Section" => "section",
                     "Scale" => "scale",

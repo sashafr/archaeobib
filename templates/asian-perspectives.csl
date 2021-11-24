@@ -155,40 +155,28 @@
         <if type="graphic report" match="any">
           <text macro="archive"/>
         </if>
-        <else-if type="article-journal bill book chapter legal_case legislation motion_picture paper-conference" match="none">
+        <else-if type="article-journal" match="any">
+          <group delimiter=", ">
+            <text variable="DOI" prefix=" DOI:"/>
+            <group delimiter=" ">
+              <text term="accessed"/>
+              <date form="text" variable="accessed"/>
+            </group>
+          </group>
+        </else-if>
+        <else-if type="webpage post-weblog post" match="any">
+          <group delimiter=", ">
+            <text variable="genre"/>
+            <text variable="URL"/>
+            <group delimiter=" ">
+              <text term="accessed"/>
+              <date form="text" variable="accessed"/>
+            </group>
+          </group>
+        </else-if>
+        <else-if type="bill book graphic legal_case motion_picture report song article-journal article-magazine article-newspaper thesis chapter paper-conference" match="none">
           <text macro="archive"/>
         </else-if>
-      </choose>
-      <choose>
-        <if type="webpage post-weblog" match="any">
-          <date variable="issued" delimiter=" ">
-            <date-part name="month"/>
-            <date-part name="day"/>
-          </date>
-        </if>
-      </choose>
-      <choose>
-        <if variable="issued" match="none">
-          <group delimiter=" ">
-            <text term="accessed" text-case="capitalize-first"/>
-            <date variable="accessed" delimiter=" ">
-              <date-part name="month"/>
-              <date-part name="day"/>
-            </date>
-          </group>
-        </if>
-      </choose>
-      <choose>
-        <if type="legal_case" match="none">
-          <choose>
-            <if variable="DOI">
-              <text variable="DOI" prefix="doi:"/>
-            </if>
-            <else>
-              <text variable="URL"/>
-            </else>
-          </choose>
-        </if>
       </choose>
     </group>
   </macro>
