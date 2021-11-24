@@ -41,7 +41,7 @@ foreach ($ab_fields as $key => $val) {
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-4">
+        <div class="col-sm-4 ab-search-col">
             <div id="search-narrow-by-fields" class="field">
                 <label><?php echo __('Narrow by Specific Fields'); ?></label>
                 <div class="inputs">
@@ -150,7 +150,7 @@ foreach ($ab_fields as $key => $val) {
                 <button type="button" class="add_search btn btn-light"><?php echo __('Add a Field'); ?></button>
             </div>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-4 ab-search-col ab-search-col-hide">
             <div class="field">
                 <?php echo $this->formLabel('item-type-search', __('Search By Type')); ?>
                 <div class="inputs">
@@ -165,7 +165,7 @@ foreach ($ab_fields as $key => $val) {
                 </div>
             </div>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-4 ab-search-col">
             <div class="field">
                 <?php echo $this->formLabel('tag-search', __('Search By Keywords')); ?>
                 <div class="inputs">
@@ -180,7 +180,7 @@ foreach ($ab_fields as $key => $val) {
         </div>
     </div>
 
-    <div id="search-by-range" class="field">
+    <div id="search-by-range" class="field ab-search-col-hide">
         <?php echo $this->formLabel('range', __('Search by a range of ID#s (example: 1-4, 156, 79)')); ?>
         <div class="inputs">
         <?php

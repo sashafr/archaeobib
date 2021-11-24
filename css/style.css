@@ -390,6 +390,16 @@ ul#sort-links-list {
 #submit-poster {
     padding-top: 1em;
 }
+
+#page-search-form .ab-search-col {
+    max-width: 100%;
+    flex: 0 0 100%;
+}
+
+#page-search-form .ab-search-col-hide {
+    display: none;
+}
+
 /** End Posters **/
 
 /** CSL **/
