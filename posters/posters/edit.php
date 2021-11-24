@@ -65,6 +65,14 @@
                       <?php endif ?>
                       <input type="hidden" name="itemCount" value="<?php echo count($poster->Items); ?>" id="itemCount"/>
                   </div>
+                  <div id="poster-additem">
+                  <?php if (count($items)): ?>
+                      <button type="button" id="add-item-button">Add an Item</button>
+                  <?php else: ?>
+                      <button type="button" id="add-item-button" disabled="disabled">Add an item &rarr;</button>
+                          <p>You have to add notes or tags to an item before adding them to a list</p>
+                  <?php endif; ?>
+                  </div>
 
                   <div id="poster-canvas" <?php echo $noItems; ?>>
                       <table class="table table-striped-ab" id="poster-items">
@@ -82,15 +90,6 @@
                               ?>
                           </tbody>
                       </table>
-                  </div>
-
-                  <div id="poster-additem">
-                  <?php if (count($items)): ?>
-                      <button type="button" id="add-item-button">Add an Item</button>
-                  <?php else: ?>
-                      <button type="button" id="add-item-button" disabled="disabled">Add an item &rarr;</button>
-                          <p>You have to add notes or tags to an item before adding them to a list</p>
-                  <?php endif; ?>
                   </div>
 
               </form>
