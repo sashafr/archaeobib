@@ -1,7 +1,9 @@
 <tr class="poster-spot">
 
     <td class="poster-item-header">
-        <p class="poster-item-title"><?php echo metadata($posterItem, 'citation', array('no_escape' => true)); ?></p>
+        <p class="poster-item-title">
+            <?php echo metadata($posterItem, array('Dublin Core', 'Creator')); ?>, <?php echo metadata($posterItem, array('Dublin Core', 'Date')); ?>. <?php echo metadata($posterItem, array('Dublin Core', 'Title')); ?><?php if (metadata($posterItem, array('Dublin Core', 'Source')) != ''): ?>, <?php echo metadata($posterItem, array('Dublin Core', 'Source')); ?><?php endif; ?>.
+        </p>
         <ul class="poster-actions">
             <li class="poster-move-top poster-control">
                 <a href="#"><span class="screen-reader-text"><?php echo __('Move to top'); ?></span></a>
