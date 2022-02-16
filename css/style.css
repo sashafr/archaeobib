@@ -200,7 +200,7 @@ input {
 }
 
 .pagination .pagination_previous a, .pagination .pagination_next a, .item-pagination .previous, .item-pagination .next {
-    background-color: #eaeaea;
+    background-color: #545b62;
     padding-bottom: 0.5em;
     display: block;
     min-height: 36px;
@@ -355,8 +355,6 @@ ul#sort-links-list {
 }
 
 .ab-add-to-poster {
-    content: url(../images/add.png);
-    width: 10px;
     height: 10px;
     display: inline-block;
     line-height: 10px;

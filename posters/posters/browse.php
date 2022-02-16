@@ -18,7 +18,7 @@ $posters = $this->posters;
                     <?php if(count($posters) == 0): ?>
                         <?php echo __("There are no " . $pageTitle . " collections yet."); ?>
                     <?php endif; ?>
-                    <a href="<?php echo public_url(array('controller'=> 'posters', 'action' => 'new')); ?>" class="button">Create a new <?php echo $pageTitle; ?> collection</a>
+                    <a href="<?php echo public_url(array('controller'=> 'posters', 'action' => 'new')); ?>" class="button">Create a new List</a> | <a href="<?php echo url('editing-lists'); ?>">Help</a>
                 <?php else: ?>
                     Marked Lists are only available to registered users: <a href="<?php echo url('users/login'); ?>">Login</a> or <a href="<?php echo url('guest-user/user/register'); ?>">Register</a>
                 <?php endif; ?>

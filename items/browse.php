@@ -52,7 +52,7 @@ $sortLinks[__('ID')] = 'id';
                       <th scope="col">Authors</th>
                       <th scope="col">Title</th>
                       <th scope="col">Source</th>
-                      <th scope="col">Temp Cit</th>
+                      <th scope="col">ID</th>
                   </tr>
               </thead>
               <tbody>

@@ -26,6 +26,26 @@
         "Publisher",
         "Series Editor"
     );
+
+    function showElement($elementName) {
+
+        $superUserOnlyElements = array(
+            "Availability",
+            "Biblioscape Ref ID",
+            "Created By ID"
+        );
+
+        if ($elementName == "External Link" && $user != current_user()) {
+            return false;
+        }
+
+        if ( in_array($elementName, $superUserOnlyElements) ) {
+            return false;
+        }
+
+        return true;
+
+    }
 ?>
 
 <div class="row mt-4 mx-5">
@@ -56,7 +76,7 @@
                         <?php foreach (all_element_texts($item, array('return_type' => 'array')) as $elementset => $elements): ?>
                             <?php foreach ($elements as $element => $elementtexts): ?>
                                 <!-- Only show availability if user is logged in -->
-                                <?php if (($element == "External Link" && $user = current_user()) || ($element != "Availability" && $element != "External Link")): ?>
+                                <?php if (showElement($element)): ?>
                                     <tr>
                                         <th scope="row"><?php if (array_key_exists($element, $elementRenames)): echo $elementRenames[$element]; else: echo $element; endif; ?>:</th>
                                         <td>
@@ -108,10 +128,10 @@
                 </div>
 
                 <nav>
-                <ul class="item-pagination navigation">
+                <!-- <ul class="item-pagination navigation">
                     <li id="previous-item" class="previous"><?php echo link_to_previous_item_show(); ?></li>
                     <li id="next-item" class="next"><?php echo link_to_next_item_show(); ?></li>
-                </ul>
+                </ul> -->
                 </nav>
 
 
