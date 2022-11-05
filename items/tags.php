@@ -5,8 +5,16 @@ echo head(array('title' => $pageTitle, 'bodyclass' => 'items tags'));
 $textSortUrl = url('items/tags?sort_field=name');
 $countSortUrl = url('items/tags?sort_field=count');
 
-$sort = $_GET['sort_field'];
-$sort_dir = $_GET['sort_dir'];
+if (isset($_GET['sort_field'])) {
+    $sort = $_GET['sort_field'];
+} else {
+    $sort = '';
+}
+if (isset($_GET['sort_dir'])) {
+    $sort_dir = $_GET['sort_dir'];
+} else {
+    $sort_dir = '';
+}
 
 if ($sort_dir == 'a') {
     $textSortUrl = $textSortUrl . "&sort_dir=d";
@@ -37,7 +45,11 @@ if ($sort_dir == 'a') {
         </div>
     </div>
 
-    <?php $letter = $_GET['letter'];
+    <?php if (isset($_GET['letter'])) {
+            $letter = $_GET['letter'];
+        } else {
+            $letter = "";
+        }
         if ($letter != "") {
             foreach ($tags as $key => $tag) {
                 if (!(strpos(strtolower($tag['name']), strtolower($letter)) === 0)) {

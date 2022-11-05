@@ -35,7 +35,7 @@
             "Created By ID"
         );
 
-        if ($elementName == "External Link" && $user != current_user()) {
+        if ($elementName == "External Link" && !current_user()) {
             return false;
         }
 
@@ -82,9 +82,9 @@
                                         <td>
                                             <?php foreach ($elementtexts as $elementtext): ?>
                                                 <?php if ($element == "External Link"): ?>
-                                                    <?php if ($user = current_user()): ?>
-                                                        <?php echo '<a target="_blank" href="' . $elementtext . '">' . $elementtext . '</a>' ?>
-                                                    <?php endif; ?>
+                                                    <?php echo '<a target="_blank" href="' . $elementtext . '">' . $elementtext . '</a>' ?>
+                                                <?php elseif ($element == "DOI"): ?>
+                                                    <?php echo '<a target="_blank" href="https://doi.org/' . $elementtext . '">' . $elementtext . '</a>' ?>
                                                 <?php elseif (in_array($element, $linkableElements)): ?>
                                                     <?php $elementLookup = get_record('Element', array('name' => $element)); ?>
                                                     <?php echo '<a href="' . url('items/browse?search=&advanced%5B0%5D%5Bjoiner%5D=and&advanced%5B0%5D%5Belement_id%5D='. $elementLookup->id  . '&advanced%5B0%5D%5Btype%5D=is+exactly&advanced%5B0%5D%5Bterms%5D=' . $elementtext) . '">' . $elementtext . '</a>'; ?></br>

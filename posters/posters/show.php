@@ -7,7 +7,11 @@
     echo queue_css_file('poster');
     echo queue_js_file('jquery.bxslider');
     echo head(array('title'=>$pageTitle));
-    $bibFormat = $_GET['format'];
+    if (isset($_GET['format'])){
+      $bibFormat = $_GET['format'];
+    } else {
+      $bibFormat = '';
+    }
 
     function url_get_contents ($url) {
         if (!function_exists('curl_init')){
@@ -77,7 +81,7 @@
                     "Series Title" => "collection-title",
                     "Series Editor" => "collection-editor",
                     "External Link" => "URL",
-                    "Identifier" => "DOI",
+                    "DOI" => "DOI",
                     "Call Number" => "call-number",
                     "Section" => "section",
                     "Scale" => "scale",

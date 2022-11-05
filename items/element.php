@@ -1,7 +1,15 @@
 <?php
 
-    $filter = $_GET['element_filter'];
-    $letter = $_GET['letter'];
+    if (isset($_GET['element_filter'])) {
+        $filter = $_GET['element_filter'];
+    } else {
+        $filter = "";
+    }
+    if (isset($_GET['letter'])) {
+        $letter = $_GET['letter'];
+    } else {
+        $letter = "";
+    }
     if ($letter != "") {
         $letterurl = "&letter=$letter";
     } else {
@@ -11,8 +19,16 @@
     $textSortUrl = url("items/search?element_filter=" . $filter . $letterurl . "&sort_field=name");
     $countSortUrl = url("items/search?element_filter=" . $filter . $letterurl . "&sort_field=count");
 
-    $sort = $_GET['sort_field'];
-    $sort_dir = $_GET['sort_dir'];
+    if (isset($_GET['sort_field'])) {
+        $sort = $_GET['sort_field'];
+    } else {
+        $sort = "";
+    }
+    if (isset($_GET['sort_dir'])) {
+        $sort_dir = $_GET['sort_dir'];
+    } else {
+        $sort_dir = "";
+    }
 
     if ($sort_dir == 'a') {
         $textSortUrl = $textSortUrl . "&sort_dir=d";
@@ -25,7 +41,7 @@
         $countSortUrl = $countSortUrl . "&sort_dir=d";
     }
 
-    if ($_GET['element_filter'] == 'type') {
+    if ($filter == 'type') {
         echo '<div class="card bg-light">';
         echo '<div class="card-body">';
 
@@ -76,7 +92,7 @@
         echo '<div class="card bg-light">';
         echo '<div class="card-body ab-tags">';
 
-        $elementFilter = get_record('Element', array('name'=> $_GET['element_filter']));
+        $elementFilter = get_record('Element', array('name'=> $filter));
         $db = get_db();
         $queryString = "SELECT text AS TEXT, count(*) as COUNT FROM om_element_texts et WHERE et.element_id = " . $elementFilter->id;
         if ($letter != "") {
